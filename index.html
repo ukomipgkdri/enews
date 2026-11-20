@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eNews IPGKDRI</title>
+<style>
+  :root{--utama:#0f4c81;--gelap:#0b365c;--emas:#f2a900;--latar:#f4f6f9;--garis:#e2e6ec;--kelabu:#64707d;
+        --hijau:#157347;--hijau-l:#e5f4ec;--merah:#b42318;--merah-l:#fdecea;--kuning:#8a6100;--kuning-l:#fff5d6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--latar);color:#1b2430;font-size:15px}
+  button,input,select,textarea{font:inherit}
+  .sembunyi{display:none!important}
+  header{background:var(--utama);color:#fff}
+  .hd{max-width:1150px;margin:auto;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .logo{font-weight:800;font-size:18px}.logo span{color:var(--emas)}
+  .rintis{background:#fff;color:var(--merah);font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.5px}
+  .siapa{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13.5px}
+  .peranan{background:var(--emas);color:#222;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase}
+  .bh{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:6px 11px;cursor:pointer}
+  main{max-width:1150px;margin:auto;padding:18px 16px}
+  .kad{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:18px;margin-bottom:14px}
+  h2{margin:0 0 14px;font-size:19px}
+  label{display:block;font-weight:600;font-size:13px;margin:12px 0 5px}
+  .in{width:100%;padding:10px 12px;border:1px solid var(--garis);border-radius:8px;background:#fff}
+  .in:focus{outline:2px solid #bcd3ea;border-color:var(--utama)}
+  textarea.in{min-height:130px;resize:vertical}
+  .dua{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+  .tiga{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px}
+  .b{border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;background:var(--utama);color:#fff;text-decoration:none;display:inline-block}
+  .b:disabled{opacity:.5;cursor:wait}
+  .b.putih{background:#fff;color:#1b2430;border:1px solid var(--garis)}
+  .b.hijau{background:var(--hijau)}.b.merah{background:#fff;color:var(--merah);border:1px solid #f0b8b2}
+  .b.kecil{padding:6px 10px;font-size:13px}
+  .penuh{width:100%}
+  .tab{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .tab button{border:1px solid var(--garis);background:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-weight:600;color:var(--kelabu)}
+  .tab button.aktif{background:var(--utama);color:#fff;border-color:var(--utama)}
+  .alat{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  .alat .in{width:auto;flex:1;min-width:180px}
+  .log{max-width:380px;margin:50px auto}
+  .log h1{margin:0 0 4px;font-size:22px;color:var(--utama)}
+  .mesej{margin-top:12px;padding:10px;border-radius:8px;font-size:13.5px;background:var(--merah-l);color:var(--merah)}
+  .mesej.ok{background:var(--hijau-l);color:var(--hijau)}
+  .info{background:#eef4fb;color:var(--gelap);padding:9px 11px;border-radius:8px;font-size:13.5px;margin-bottom:6px}
+  .lencana{display:inline-block;align-self:flex-start;font-size:12px;font-weight:700;padding:2px 9px;border-radius:20px}
+  .s-Baharu{background:var(--kuning-l);color:var(--kuning)}
+  .s-Diterbitkan,.s-Aktif,.s-Diluluskan{background:var(--hijau-l);color:var(--hijau)}
+  .s-Ditolak,.s-Perlu{background:var(--merah-l);color:var(--merah)}
+  .s-Tidak,.s-Selesai,.s-Dibatalkan{background:#eceff3;color:#3d4752}
+  .senarai{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+  .item{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column}
+  .item .gb{aspect-ratio:16/9;background:#dfe4ea center/cover}
+  .item .isi{padding:12px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .item h3{margin:0;font-size:15px}
+  .kecil-t{font-size:12.5px;color:var(--kelabu)}
+  .nota{background:var(--merah-l);color:#7a1a12;padding:7px 9px;border-radius:8px;font-size:13px}
+  .item .kaki{padding:10px 12px;border-top:1px solid var(--garis);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .kunci{font-size:12.5px;color:var(--hijau);font-weight:600}
+  .kosong{text-align:center;color:var(--kelabu);padding:40px;background:#fff;border-radius:12px;border:2px dashed var(--garis);grid-column:1/-1}
+  .gambar-pilih{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .gambar-pilih div{width:80px;height:80px;border-radius:8px;background:#dfe4ea center/cover;position:relative}
+  .gambar-pilih button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--garis);vertical-align:middle}
+  th{font-size:12px;color:var(--kelabu);text-transform:uppercase}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr.klik{cursor:pointer}tr.klik:hover,tr.klik:focus{background:#f6f8fa;outline:none}
+  .tbl{overflow-x:auto}
+  .pw{position:relative}.pw .in{padding-right:42px}
+  .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;font-size:16px;color:var(--kelabu)}
+  .klbox{background:#eef4fb;border:1px dashed var(--utama);border-radius:10px;padding:12px;text-align:center;margin-top:12px}
+  .klbox code{font-size:20px;font-weight:800;letter-spacing:1px}
+  .ringkas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .ringkas div{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:12px 14px}
+  .ringkas b{display:block;font-size:24px}
+  .ringkas span{font-size:12.5px;color:var(--kelabu)}
+  .bar{height:10px;background:#eef1f5;border-radius:6px;overflow:hidden;min-width:80px}
+  .bar i{display:block;height:100%;background:var(--utama);border-radius:6px}
+  .bulan{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;align-items:end;height:140px;padding-top:10px}
+  .bulan div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:11.5px;color:var(--kelabu)}
+  .bulan i{display:block;width:70%;background:var(--utama);border-radius:4px 4px 0 0;min-height:2px}
+  .bulan b{font-size:12px;color:#1b2430}
+  .lapis{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;padding:20px 10px;overflow-y:auto;z-index:50}
+  .modal{background:#fff;border-radius:14px;max-width:660px;width:100%;padding:20px}
+  .modal h3{margin:0 0 6px}
+  .galeri{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin:10px 0}
+  .galeri a{display:block;aspect-ratio:1;border-radius:8px;background:#dfe4ea center/cover}
+  .kapsyen{white-space:pre-wrap;background:#f6f8fa;border:1px solid var(--garis);border-radius:8px;padding:10px;font-size:14px;max-height:220px;overflow:auto}
+  .baris{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  .b.fb{background:#1877f2}
+  textarea.kapsyen{width:100%;min-height:200px;font-family:inherit;resize:vertical;max-height:none}
+  .fbok{background:var(--hijau-l);color:var(--hijau);border-radius:10px;padding:10px 12px;font-size:14px;margin-top:12px}
+  .langkah{margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.6}
+  .langkah code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:13px}
+  .kaki-app{max-width:1150px;margin:10px auto 0;padding:14px 16px 22px;border-top:1px solid var(--garis);text-align:center;font-size:12.5px;color:var(--kelabu);line-height:1.7}
+  .kaki-app a{color:var(--utama);text-decoration:none;font-weight:600}
+  .roti{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1b2430;color:#fff;padding:10px 16px;border-radius:10px;z-index:99;font-size:14px;max-width:90vw}
+  .roti.salah{background:var(--merah)}
+  /* ---- Tempahan ---- */
+  .kepalaT{display:flex;gap:12px;padding:12px;align-items:center;border-bottom:1px solid var(--garis)}
+  .tkh{width:54px;flex:none;text-align:center;background:var(--utama);color:#fff;border-radius:10px;padding:5px 0}
+  .tkh small{display:block;font-size:11px;font-weight:700}.tkh b{display:block;font-size:22px;line-height:1.1}
+  .tkh.kelabu{background:var(--kelabu)}
+  .slot{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+  .sl{border-radius:8px;padding:9px 11px;font-size:13.5px}
+  .sl.ok{background:var(--hijau-l);color:var(--hijau)}.sl.sekat{background:var(--merah-l);color:#7a1a12}
+  .sl.amaran{background:var(--kuning-l);color:var(--kuning)}.sl.info{background:#eef4fb;color:var(--gelap)}
+  .pilihan{display:flex;gap:8px;flex-wrap:wrap}
+  .pil{display:flex;align-items:center;gap:8px;border:1px solid var(--garis);border-radius:10px;padding:9px 13px;font-size:14px;font-weight:500;margin:0;cursor:pointer}
+  .pil:has(input:checked){border-color:var(--utama);background:#eef4fb;font-weight:600}
+  .semak{display:flex;flex-direction:column;gap:6px}
+  .cek{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:400;margin:0}
+  .alatR label{display:flex;align-items:center;gap:8px;flex:1;margin:0;font-weight:400;font-size:14px}
+  .alatR .qty{width:72px;padding:6px 8px}
+  .krewR{border:1px solid var(--garis);border-radius:8px;padding:8px 10px}
+  .krewSt{margin-left:auto;font-size:12px;font-weight:600;white-space:nowrap}
+  .sub{margin:16px 0 6px;font-size:14px}
+  .dl{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:12px 0 0;font-size:13.5px}
+  .dl dt{color:var(--kelabu)}.dl dd{margin:0;word-break:break-word}
+  .segmen{display:flex;border:1px solid var(--garis);border-radius:8px;overflow:hidden}
+  .segmen button{border:0;background:#fff;color:var(--kelabu);padding:8px 13px;font-weight:600;cursor:pointer}
+  .segmen button.aktif{background:var(--utama);color:#fff}
+  .duaKad{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  /* ---- Kalendar ---- */
+  .kalBalut{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+  .kalUtama{flex:999 1 560px;min-width:0;margin:0}
+  .kalSisi{flex:1 1 280px;min-width:0;margin:0}
+  .kalHari,.kalGrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+  .kalHari div{font-size:12px;font-weight:700;color:var(--kelabu);text-transform:uppercase;padding:4px 6px}
+  .sel{min-height:96px;border:1px solid var(--garis);border-radius:8px;padding:5px;background:#fff;text-align:left;display:flex;flex-direction:column;gap:3px;cursor:pointer;color:inherit;overflow:hidden;min-width:0}
+  .sel .no{font-size:13px;font-weight:700;align-self:flex-start}
+  .sel.hujung{background:#f1f3f6}.sel.luar{opacity:.45}
+  .sel.kini .no{color:#fff;background:var(--utama);border-radius:10px;padding:0 6px}
+  .sel.pilih{border:2px solid var(--utama);padding:4px}
+  .ev{display:block;font-size:11px;line-height:1.3;border-radius:5px;padding:2px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ev-Diluluskan{background:var(--utama);color:#fff}.ev-Selesai{background:#dfe4ea;color:#3d4752}
+  .ev-Baharu,.ev-Perlu{background:var(--kuning-l);color:var(--kuning);border:1px dashed var(--kuning)}
+  .lagi{font-size:11px;color:var(--kelabu)}
+  .bil{display:none}
+  .legenda{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--kelabu)}
+  .legenda i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+  .evSisi{border:1px solid var(--garis);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;margin-top:8px}
+  .evSisi.milik{border-color:var(--emas);box-shadow:inset 3px 0 0 var(--emas)}
+  .ev.milik{box-shadow:inset 3px 0 0 var(--emas)}
+  .sel.tutup{background:repeating-linear-gradient(135deg,#fff 0 6px,#f3f4f6 6px 12px)}
+  .sel .awal{font-size:10px;font-weight:700;color:var(--hijau);background:var(--hijau-l);border-radius:6px;padding:0 5px;align-self:flex-start}
+  .masaBar{position:relative;height:30px;background:#f1f3f6;border-radius:8px;margin:10px 0 4px;overflow:hidden}
+  .masaBar i{position:absolute;top:0;bottom:0;border-radius:4px}
+  .masaBar i.lulus{background:var(--utama);opacity:.85}
+  .masaBar i.semak{background:var(--kuning-l);border:1px dashed var(--kuning)}
+  .masaSkala{display:flex;justify-content:space-between;font-size:10.5px;color:var(--kelabu)}
+  .lapang{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .lapang button{border:1px solid var(--hijau);background:var(--hijau-l);color:var(--hijau);border-radius:8px;padding:6px 10px;font-weight:600;font-size:13px;cursor:pointer}
+  @media(max-width:640px){
+    .dua,.tiga,.duaKad{grid-template-columns:1fr}.siapa .nm{display:none}.ringkas{grid-template-columns:repeat(2,1fr)}
+    .sel{min-height:54px}.ev,.lagi{display:none}
+    .bil{display:inline-block;align-self:flex-start;background:var(--utama);color:#fff;border-radius:8px;font-size:11px;font-weight:700;padding:0 6px}
+    .dl{grid-template-columns:1fr}.dl dt{margin-top:4px}
+  }
+</style>
+</head>
+<body>
+
+<header><div class="hd">
+  <div class="logo">e<span>News</span> IPGKDRI</div>
+  <span class="rintis sembunyi" id="lblRintis">RINTIS</span>
+  <div class="siapa sembunyi" id="siapa">
+    <span class="peranan" id="lblPeranan"></span><span class="nm" id="lblNama"></span>
+    <button class="bh" onclick="bukaTukarKL()">🔑 Kata Laluan</button>
+    <button class="bh" onclick="logKeluar()">Log Keluar</button>
+  </div>
+</div></header>
+
+<!-- ========== LOG MASUK ========== -->
+<section id="skrinLog" class="log sembunyi">
+  <div class="kad">
+    <h1>Log Masuk</h1>
+    <div class="kecil-t">Sistem berita kampus &amp; tempahan siaran langsung UKOM IPGKDRI</div>
+    <label for="lEmel">Emel</label><input class="in" id="lEmel" type="email" autocomplete="username">
+    <label for="lKL">Kata Laluan</label><input class="in" id="lKL" type="password" autocomplete="current-password">
+    <div style="height:14px"></div>
+    <button class="b penuh" id="bLog" onclick="logMasuk()">Log Masuk</button>
+    <div style="margin-top:12px;text-align:center"><a href="#" onclick="bukaLupa();return false" style="color:var(--utama);font-weight:600">Lupa kata laluan?</a></div>
+    <div class="kecil-t" style="margin-top:10px">Akaun didaftarkan oleh Super Admin eNews.</div>
+    <div id="lMesej" class="mesej sembunyi"></div>
+  </div>
+</section>
+
+<!-- ========== TETAPKAN SEMULA KATA LALUAN (dari pautan e-mel) ========== -->
+<section id="skrinReset" class="log sembunyi">
+  <div class="kad">
+    <h1>Kata Laluan Baharu</h1>
+    <div class="kecil-t" id="rInfo">Menyemak pautan…</div>
+    <div id="rBorang" class="sembunyi">
+      <label for="rKL">Kata laluan baharu (min. 8 aksara)</label>
+      <div class="pw"><input class="in" id="rKL" type="password" autocomplete="new-password"><button type="button" onclick="lihatKL('rKL',this)" aria-label="Tunjuk atau sembunyi kata laluan">👁</button></div>
+      <label for="rKL2">Sahkan kata laluan baharu</label>
+      <div class="pw"><input class="in" id="rKL2" type="password" autocomplete="new-password"><button type="button" onclick="lihatKL('rKL2',this)" aria-label="Tunjuk atau sembunyi kata laluan">👁</button></div>
+      <div style="height:14px"></div>
+      <button class="b penuh" id="bReset" onclick="hantarReset()">Simpan Kata Laluan</button>
+    </div>
+    <div id="rMesej" class="mesej sembunyi"></div>
+    <div style="margin-top:12px;text-align:center"><a href="#" onclick="keLogMasuk();return false" style="color:var(--utama);font-weight:600">← Kembali ke Log Masuk</a></div>
+  </div>
+</section>
+
+<!-- ========== APLIKASI ========== -->
+<main id="skrinApp" class="sembunyi">
+  <div class="tab" id="tab"></div>
+
+  <!-- Borang tambah / sunting berita -->
+  <section id="p-borang" class="sembunyi"><div class="kad">
+    <h2 id="bTajukBorang">Tambah Berita</h2>
+    <div id="bInfo"></div>
+    <label for="hTajuk">Tajuk Berita *</label><input class="in" id="hTajuk" maxlength="200">
+    <div class="dua">
+      <div><label for="hTarikh">Tarikh Program *</label><input class="in" id="hTarikh" type="date"></div>
+      <div><label for="hTempat">Tempat *</label><input class="in" id="hTempat" maxlength="200"></div>
+    </div>
+    <label for="hJabatan">Jabatan / Unit Penganjur *</label><select class="in" id="hJabatan" onchange="ubahJab('hJabatan','hJabLain')"></select>
+    <input class="in sembunyi" id="hJabLain" maxlength="120" placeholder="Nyatakan nama penganjur (cth. Persatuan Bahasa Melayu IPGKDRI)" style="margin-top:6px" aria-label="Nama penganjur lain">
+    <label for="hKet">Keterangan / Kapsyen *</label><textarea class="in" id="hKet" maxlength="5000" placeholder="Objektif, peserta, perasmi, impak program…"></textarea>
+    <label for="hGambar">Gambar * <span class="kecil-t" id="lblMaks"></span></label>
+    <input type="file" id="hGambar" accept="image/*" multiple>
+    <div class="gambar-pilih" id="pratonton"></div>
+    <div class="baris">
+      <button class="b" id="bSimpan" onclick="simpanBerita()">Hantar Berita</button>
+      <button class="b putih sembunyi" id="bBatal" onclick="batalSunting()">Batal</button>
+    </div>
+  </div></section>
+
+  <!-- Berita saya (pengguna) -->
+  <section id="p-saya" class="sembunyi">
+    <h2>Berita Saya</h2>
+    <div class="senarai" id="senaraiSaya"></div>
+  </section>
+
+  <!-- Admin: senarai berita -->
+  <section id="p-semak" class="sembunyi">
+    <h2>Senarai Berita</h2>
+    <div class="alat">
+      <input class="in" id="cari" placeholder="Cari tajuk / pengirim / tempat…" oninput="lukisSemak()" aria-label="Cari berita">
+      <select class="in" id="tapisJab" onchange="lukisSemak()" aria-label="Tapis jabatan"></select>
+    </div>
+    <div class="tab" id="tapis"></div>
+    <div class="senarai" id="senaraiSemak"></div>
+  </section>
+
+  <!-- Tempahan saya (semua peranan bukan admin) -->
+  <section id="p-tSaya" class="sembunyi">
+    <div class="alat"><h2 style="margin:0">Tempahan Saya</h2><button class="b" style="margin-left:auto" onclick="baruTempahan()">+ Tempahan Baharu</button></div>
+    <div class="info">Tempahan liputan atau siaran langsung oleh UKOM perlu dibuat sekurang-kurangnya <b id="lblMinHari"></b> hari bekerja sebelum program. Keputusan dimaklumkan melalui e-mel.</div>
+    <div class="senarai" id="senaraiTSaya" style="margin-top:12px"></div>
+  </section>
+
+  <!-- Borang tempahan -->
+  <section id="p-borangT" class="sembunyi"><div class="kad">
+    <h2 id="tTajukBorang">Tempahan Siaran Langsung / Liputan UKOM</h2>
+    <div id="tInfo"></div>
+    <label for="tProgram">Nama Program *</label><input class="in" id="tProgram" maxlength="200">
+    <div class="dua">
+      <div><label for="tJabatan">Jabatan / Unit Penganjur *</label><select class="in" id="tJabatan" onchange="ubahJab('tJabatan','tJabLain')"></select>
+        <input class="in sembunyi" id="tJabLain" maxlength="120" placeholder="Nyatakan nama penganjur" style="margin-top:6px" aria-label="Nama penganjur lain"></div>
+      <div><label for="tLokasi">Lokasi *</label><input class="in" id="tLokasi" list="dlLokasi" maxlength="120" placeholder="Pilih atau taip lokasi"><datalist id="dlLokasi"></datalist></div>
+    </div>
+    <div class="tiga">
+      <div><label for="tTarikh">Tarikh *</label><input class="in" id="tTarikh" type="date"></div>
+      <div><label for="tMula">Masa Mula *</label><input class="in" id="tMula" type="time"></div>
+      <div><label for="tTamat">Masa Tamat *</label><input class="in" id="tTamat" type="time"></div>
+    </div>
+    <div id="tSlot" aria-live="polite"></div>
+    <label>Jenis Liputan *</label><div class="pilihan" id="tJenis"></div>
+    <div class="dua">
+      <div><label>Platform Siaran *</label><div id="tPlatform" class="semak"></div></div>
+      <div><label>Keperluan Peralatan</label><div id="tAlat" class="semak"></div></div>
+    </div>
+    <div class="tiga">
+      <div><label for="tPeserta">Anggaran Peserta</label><input class="in" id="tPeserta" type="number" min="0"></div>
+      <div><label for="tPenghubung">Pegawai Penghubung *</label><input class="in" id="tPenghubung" maxlength="120"></div>
+      <div><label for="tTelefon">No. Telefon *</label><input class="in" id="tTelefon" maxlength="30" placeholder="cth. 019-xxx xxxx"></div>
+    </div>
+    <label for="tCatatan">Catatan Tambahan</label><textarea class="in" id="tCatatan" maxlength="2000" style="min-height:90px" placeholder="Segmen yang perlu disiarkan, tetamu kehormat, keperluan khas…"></textarea>
+    <label for="tFail">Atur Cara / Kertas Kerja <span class="kecil-t" id="lblMaksPdf"></span></label>
+    <input type="file" id="tFail" accept="application/pdf">
+    <div id="tLampiran" class="kecil-t" style="margin-top:6px"></div>
+    <div class="baris">
+      <button class="b" id="bSimpanT" onclick="simpanTempahan()">Hantar Tempahan</button>
+      <button class="b putih" onclick="batalBorangT()">Batal</button>
+    </div>
+  </div></section>
+
+  <!-- Ketua Jabatan: berita jabatan -->
+  <section id="p-bJab" class="sembunyi">
+    <h2 id="ttlBJab">Berita Jabatan</h2>
+    <div class="info" id="infoBJab"></div>
+    <div class="ringkas" id="bJabRingkas" style="margin-top:12px"></div>
+    <div class="alat"><input class="in" id="bJabCari" placeholder="Cari tajuk / pengirim / tempat…" oninput="lukisBJab()" aria-label="Cari berita">
+      <select class="in sembunyi" id="bJabJab" onchange="lukisBJab()" aria-label="Tapis jabatan"></select></div>
+    <div class="tab" id="bJabTapis"></div>
+    <div class="senarai" id="senaraiBJab"></div>
+  </section>
+
+  <!-- Ketua Jabatan: tempahan jabatan -->
+  <section id="p-tJab" class="sembunyi">
+    <h2 id="ttlTJab">Tempahan Jabatan</h2>
+    <div class="info" id="infoTJab" style="margin-bottom:12px"></div>
+    <div class="ringkas" id="tJabRingkas"></div>
+    <div class="alat"><input class="in" id="tJabCari" placeholder="Cari program / pemohon / lokasi…" oninput="lukisTJab()" aria-label="Cari tempahan">
+      <select class="in sembunyi" id="tJabJab" onchange="lukisTJab()" aria-label="Tapis jabatan"></select></div>
+    <div class="tab" id="tJabTapis"></div>
+    <div class="senarai" id="senaraiTJab"></div>
+  </section>
+
+  <!-- Admin: urus tempahan -->
+  <section id="p-urus" class="sembunyi">
+    <div class="alat"><h2 style="margin:0">Urus Tempahan</h2><button class="b" style="margin-left:auto" onclick="baruTempahan()">+ Tempahan Baharu</button></div>
+    <div class="ringkas" id="urusRingkas"></div>
+    <div class="alat">
+      <input class="in" id="urusCari" placeholder="Cari program / pemohon / lokasi…" oninput="lukisUrus()" aria-label="Cari tempahan">
+      <select class="in" id="urusJab" onchange="lukisUrus()" aria-label="Tapis jabatan"></select>
+    </div>
+    <div class="tab" id="urusTapis"></div>
+    <div class="kad" style="padding:6px 12px"><div class="tbl" id="urusJadual"></div></div>
+  </section>
+
+  <!-- Kalendar -->
+  <section id="p-kalendar" class="sembunyi">
+    <div class="kalBalut">
+      <div class="kad kalUtama">
+        <div class="alat">
+          <button class="b putih kecil" onclick="ubahBulan(-1)" aria-label="Bulan sebelum">‹</button>
+          <h2 id="kalTajuk" style="margin:0;min-width:150px;text-align:center"></h2>
+          <button class="b putih kecil" onclick="ubahBulan(1)" aria-label="Bulan berikut">›</button>
+          <button class="b putih kecil" onclick="S.kalBulan=null;muatKalendar()">Hari Ini</button>
+          <div class="legenda">
+            <span><i style="background:var(--utama)"></i>Diluluskan</span>
+            <span><i style="background:var(--kuning-l);border:1px dashed var(--kuning)"></i>Dalam semakan</span>
+            <span><i style="background:#dfe4ea"></i>Selesai</span>
+            <span><i style="background:#f1f3f6;border:1px solid var(--garis)"></i>Hujung minggu</span>
+            <span><i style="background:#fff;box-shadow:inset 3px 0 0 var(--emas);border:1px solid var(--garis)"></i>Tempahan anda</span>
+            <span id="legTutup"><i style="background:repeating-linear-gradient(135deg,#fff 0 3px,#d9dde3 3px 6px)"></i>Belum boleh ditempah</span>
+          </div>
+        </div>
+        <div class="kalHari"><div>Isn</div><div>Sel</div><div>Rab</div><div>Kha</div><div>Jum</div><div>Sab</div><div>Aha</div></div>
+        <div class="kalGrid" id="kalGrid"></div>
+      </div>
+      <div class="kad kalSisi" id="kalSisi"></div>
+    </div>
+  </section>
+
+  <!-- Admin: analisis -->
+  <section id="p-analisis" class="sembunyi">
+    <div class="alat">
+      <h2 style="margin:0">Analisis</h2>
+      <div class="segmen" role="tablist" aria-label="Jenis analisis">
+        <button id="anM-berita" role="tab" onclick="tukarAnMod('berita')">Berita</button>
+        <button id="anM-live" role="tab" onclick="tukarAnMod('live')">Siaran Live</button>
+      </div>
+      <select class="in" id="anTahun" onchange="lukisAnalisis()" aria-label="Tahun"></select>
+      <select class="in" id="anBulan" onchange="lukisAnalisis()" aria-label="Bulan"></select>
+      <button class="b putih" onclick="eksportCSV()">⬇ Muat Turun CSV</button>
+    </div>
+    <div class="ringkas" id="anRingkas"></div>
+    <div class="kad"><h2 style="font-size:16px">Ikut Jabatan/Unit</h2><div class="tbl" id="anJadual"></div></div>
+    <div class="kad"><h2 style="font-size:16px" id="anTajukBulan">Ikut Bulan</h2><div class="bulan" id="anBulanCarta"></div></div>
+    <div class="duaKad" id="anLive"></div>
+  </section>
+
+  <!-- Admin: krew & peralatan -->
+  <section id="p-sumber" class="sembunyi">
+    <div class="kad">
+      <h2>Krew UKOM</h2>
+      <div class="tiga">
+        <div><label for="kNama">Nama *</label><input class="in" id="kNama" maxlength="120"></div>
+        <div><label for="kPeranan">Peranan</label><input class="in" id="kPeranan" list="dlPerananKrew" placeholder="cth. Jurukamera"></div>
+        <div><label for="kTel">No. Telefon</label><input class="in" id="kTel" maxlength="30"></div>
+      </div>
+      <datalist id="dlPerananKrew"><option>Jurukamera</option><option>Operator siaran</option><option>Hos / Juruacara</option><option>Juruteknik audio</option><option>Jurugambar</option></datalist>
+      <div class="baris"><button class="b" id="bKrew" onclick="tambahKrew()">Tambah Krew</button></div>
+      <div class="tbl" id="jadualKrew" style="margin-top:12px"></div>
+    </div>
+    <div class="kad">
+      <h2>Peralatan</h2>
+      <div class="tiga">
+        <div><label for="pKod">Kod * <span class="kecil-t">(huruf besar, cth. KAM)</span></label><input class="in" id="pKod" maxlength="12"></div>
+        <div><label for="pNama">Nama Peralatan *</label><input class="in" id="pNama" maxlength="120"></div>
+        <div><label for="pKuantiti">Kuantiti *</label><input class="in" id="pKuantiti" type="number" min="0" value="1"></div>
+      </div>
+      <div class="baris"><button class="b" id="bAlat" onclick="tambahPeralatan()">Tambah Peralatan</button></div>
+      <div class="tbl" id="jadualPeralatan" style="margin-top:12px"></div>
+    </div>
+    <div class="kecil-t">Senarai lokasi disunting dalam tab <b>Lokasi</b> di Google Sheet (satu lokasi bagi setiap baris).</div>
+  </section>
+
+  <!-- Super Admin: jabatan / unit -->
+  <section id="p-jabatan" class="sembunyi">
+    <div class="kad">
+      <h2>Jabatan / Unit</h2>
+      <div class="alat">
+        <input class="in" id="jNama" maxlength="120" placeholder="Nama Jabatan/Unit baharu" aria-label="Nama Jabatan/Unit baharu">
+        <button class="b" id="bJabTambah" onclick="tambahJabatan()">+ Tambah</button>
+      </div>
+      <div class="kecil-t">Menukar nama akan mengemas kini semua pengguna, berita dan tempahan yang menggunakan nama lama. Jabatan/Unit yang masih mempunyai pengguna tidak boleh dipadam.</div>
+      <div class="tbl" id="jadualJabatan" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- Super Admin: pengguna -->
+  <section id="p-pengguna" class="sembunyi">
+    <div class="kad">
+      <h2>Daftar Pengguna</h2>
+      <div class="dua">
+        <div><label for="uEmel">Emel *</label><input class="in" id="uEmel" type="email"></div>
+        <div><label for="uNama">Nama Penuh *</label><input class="in" id="uNama"></div>
+      </div>
+      <div class="dua">
+        <div><label for="uJabatan">Jabatan / Unit *</label><select class="in" id="uJabatan"></select></div>
+        <div><label for="uPeranan">Peranan</label><select class="in" id="uPeranan"></select></div>
+      </div>
+      <div class="kecil-t" style="margin-top:8px;line-height:1.6"><b>Super Admin</b>: kawal keseluruhan sistem, pengguna &amp; jabatan · <b>Admin</b>: urus berita &amp; tempahan, tidak boleh daftar pengguna · <b>Pengurusan Atasan</b>: lihat semua berita &amp; tempahan, sunting milik sendiri sahaja · <b>Ketua Jabatan</b>: berita &amp; tempahan sendiri + lihat berita &amp; tempahan seluruh ahli jabatan · <b>Pensyarah</b>: berita &amp; tempahan sendiri sahaja · <b>Staf</b>: berita &amp; tempahan sendiri sahaja · <b>Sinergi</b> (jawatankuasa program): berita &amp; tempahan sendiri sahaja</div>
+      <div style="height:14px"></div>
+      <button class="b" id="bTambah" onclick="tambahPengguna()">Daftar</button>
+      <div id="klBaru"></div>
+    </div>
+    <div class="kad"><h2>Senarai Pengguna</h2><div class="tbl" id="jadualPengguna"></div></div>
+  </section>
+
+  <!-- Admin: tetapan Facebook -->
+  <section id="p-tetapan" class="sembunyi">
+    <div class="kad">
+      <h2>Sambungan Page Facebook</h2>
+      <div id="fbRintis"></div>
+      <div id="fbStatus" class="kecil-t">Memuatkan…</div>
+      <label for="fbPageId">Page ID *</label><input class="in" id="fbPageId" inputmode="numeric" placeholder="cth. 123456789012345">
+      <label for="fbToken">Page Access Token <span class="kecil-t">(kosongkan untuk kekalkan token sedia ada)</span></label>
+      <div class="pw"><input class="in" id="fbToken" type="password" autocomplete="off" placeholder="EAAG…"><button type="button" onclick="lihatKL('fbToken',this)" aria-label="Tunjuk atau sembunyi token">👁</button></div>
+      <div class="baris">
+        <button class="b" id="bFbSimpan" onclick="simpanFB()">Simpan & Uji Sambungan</button>
+        <button class="b merah" onclick="padamFB()">Putuskan Sambungan</button>
+      </div>
+    </div>
+    <div class="kad">
+      <h2 style="font-size:16px">Cara mendapatkan Page ID & Token (sekali sahaja)</h2>
+      <ol class="langkah">
+        <li>Log masuk <b>developers.facebook.com</b> dengan akaun FB yang menjadi <b>admin Page</b>. Klik <b>My Apps → Create App</b>, pilih jenis <b>Business</b>.</li>
+        <li>Buka <b>Tools → Graph API Explorer</b>. Pilih app tadi. Di <b>Permissions</b>, tambah: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>pages_manage_posts</code>. Klik <b>Generate Access Token</b> dan benarkan Page.</li>
+        <li>Buka <b>Tools → Access Token Debugger</b>, tampal token tadi, klik <b>Debug</b>, kemudian <b>Extend Access Token</b>. Salin token panjang (long-lived).</li>
+        <li>Kembali ke Graph API Explorer, tampal token panjang itu, jalankan <code>GET me/accounts</code>. Salin <b>id</b> (Page ID) serta <b>access_token</b> (Page Access Token).</li>
+        <li>Tampal kedua-duanya di atas dan klik <b>Simpan & Uji Sambungan</b>. Nama Page akan dipaparkan jika berjaya.</li>
+      </ol>
+      <div class="kecil-t" style="margin-top:8px">Token disimpan dalam Script Properties (bukan dalam Sheet atau kod) dan tidak dipaparkan semula.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="kaki-app" id="kakiApp">
+  Hak Cipta © <span id="kTahun">2026</span> Institut Pendidikan Guru Kampus Dato' Razali Ismail (IPGKDRI). Hak cipta terpelihara.<br>
+  Pembangun: <a href="mailto:biamin@ipgm.edu.my" id="kPembangun">biamin@ipgm.edu.my</a> · <span id="kVersi">eNews IPGKDRI v1.4</span>
+</footer>
+
+<div id="modal"></div>
+
+<script>
+const S = { cfg:null, token:null, user:null, berita:[], saya:[], pengguna:[], tapis:'Baharu', gambar:[], edit:null, tabAktif:null,
+  sumber:{peralatan:[],krew:[],lokasi:[]}, tSaya:[], tJab:[], tSemua:[], tTapis:'Baharu', tJabTapis:'Semua',
+  bJab:[], bJabTapis:'Semua', jabUrus:[],
+  editT:null, lampiran:null, dariTempahan:null, kalBulan:null, kalPilih:null, kalData:{}, anMod:'berita' };
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const BLN = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
+const BLN_B = ['JAN','FEB','MAC','APR','MEI','JUN','JUL','OGO','SEP','OKT','NOV','DIS'];
+const BULAN = ['Januari','Februari','Mac','April','Mei','Jun','Julai','Ogos','September','Oktober','November','Disember'];
+const HARI = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
+const LABEL_PERANAN = {superadmin:'Super Admin',admin:'Admin',atasan:'Pengurusan Atasan',ketua:'Ketua Jabatan',pensyarah:'Pensyarah',staf:'Staf',sinergi:'Sinergi'};
+const STATUS_T = ['Baharu','Perlu Pindaan','Diluluskan','Selesai','Ditolak','Dibatalkan'];
+function tarikh(s){ const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s||''); return m?(+m[3])+' '+BLN[+m[2]-1]+' '+m[1]:(s||''); }
+function tarikhPanjang(s){ const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s||''); if(!m) return s||''; const d=new Date(+m[1],+m[2]-1,+m[3]); return HARI[d.getDay()]+', '+(+m[3])+' '+BULAN[+m[2]-1]+' '+m[1]; }
+function masa12(h){ const m=/^(\d{1,2}):(\d{2})/.exec(h||''); if(!m) return h||''; const j=+m[1]; return (j%12===0?12:j%12)+':'+m[2]+' '+(j<12?'pagi':j===12?'tengah hari':j<19?'petang':'malam'); }
+function julatMasa(t){ return masa12(t.masaMula)+' – '+masa12(t.masaTamat); }
+function minit(h){ const m=/^(\d{1,2}):(\d{2})/.exec(h||''); return m?(+m[1])*60+(+m[2]):0; }
+function tkhStr(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function hariIniStr(){ return tkhStr(new Date()); }
+function img(id,w){ return 'https://lh3.googleusercontent.com/d/'+id+'=w'+(w||600); }
+function pautanFail(id){ return 'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view'; }
+function urlSelamat(u){ return /^https?:\/\//i.test(String(u||''))?u:'#'; }
+function lencana(s){ return '<span class="lencana s-'+esc(String(s).split(' ')[0])+'">'+esc(s)+'</span>'; }
+function roti(m,salah){ const t=document.createElement('div'); t.className='roti'+(salah?' salah':''); t.setAttribute('role','status'); t.textContent=m; document.body.appendChild(t); setTimeout(()=>t.remove(),3800); }
+function kunciLS(k){ return k+(S.cfg&&S.cfg.rintis?'_rintis':''); }
+function simpan(k,v){ try{ v==null?localStorage.removeItem(kunciLS(k)):localStorage.setItem(kunciLS(k),v); }catch(e){} }
+function ambil(k){ try{ return localStorage.getItem(kunciLS(k)); }catch(e){ return null; } }
+function ambil0(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function pilihan(senarai,pilih,kosong){ return (kosong?'<option value="">'+esc(kosong)+'</option>':'')+senarai.map(j=>'<option'+(j===pilih?' selected':'')+'>'+esc(j)+'</option>').join(''); }
+function pilihanPeranan(pilih){ return Object.keys(LABEL_PERANAN).map(k=>'<option value="'+k+'"'+(k===pilih?' selected':'')+'>'+LABEL_PERANAN[k]+'</option>').join(''); }
+function jabatanList(extra){ const l=S.cfg.jabatan.slice(); if(extra && l.indexOf(extra)<0) l.unshift(extra); return l; }
+/* ---- Pilihan "Lain-lain" pada Jabatan/Unit Penganjur: papar kotak teks untuk nama penganjur ---- */
+function opsyenLain(){ return S.cfg.jabatan.find(j=>/^lain[\s-]*lain$/i.test(String(j).trim()))||''; }
+function ubahJab(sel,lain){
+  const lagi=!!opsyenLain() && $(sel).value===opsyenLain();
+  $(lain).classList.toggle('sembunyi',!lagi);
+  if(lagi) $(lain).focus();
+}
+/** Isi senarai Jabatan/Unit; nilai yang tiada dalam senarai dipaparkan sebagai "Lain-lain" + kotak teks. */
+function isiJab(sel,lain,nilai){
+  const L=opsyenLain(), senarai=S.cfg.jabatan.slice();
+  let pilih=nilai||'', teks='';
+  if(pilih && senarai.indexOf(pilih)<0){
+    if(L){ teks=pilih; pilih=L; } else senarai.unshift(pilih);
+  }
+  $(sel).innerHTML=pilihan(senarai,pilih,'— Pilih Jabatan/Unit —');
+  $(lain).value=teks;
+  $(lain).classList.toggle('sembunyi',!(L && pilih===L));
+}
+/** Nilai Jabatan/Unit untuk disimpan: teks penganjur jika "Lain-lain" dipilih. Kosong jika belum diisi. */
+function nilaiJab(sel,lain){
+  const v=$(sel).value;
+  return (opsyenLain() && v===opsyenLain()) ? $(lain).value.trim() : v;
+}
+function tutupModal(){ $('modal').innerHTML=''; }
+function bukaModal(html,lebar){ $('modal').innerHTML='<div class="lapis" onclick="if(event.target===this)tutupModal()"><div class="modal" role="dialog" aria-modal="true"'+(lebar?' style="max-width:'+lebar+'px"':'')+'>'+html+'</div></div>'; }
+const admin = () => !!S.user && (S.user.peranan==='admin'||S.user.peranan==='superadmin');
+const superadmin = () => !!S.user && S.user.peranan==='superadmin';
+const ketua = () => !!S.user && S.user.peranan==='ketua';
+const atasan = () => !!S.user && S.user.peranan==='atasan';
+
+/* ---- Sambungan ke pelayan ----
+   Dalam Apps Script : google.script.run (cara asal).
+   Di laman portal   : fetch ke URL /exec TANPA kuki Google, jadi akaun Google pengguna
+                       tidak terlibat langsung -> tiada ralat "unable to open the file". */
+const URL_API='https://script.google.com/macros/s/AKfycbxKP4MFm35z2zxMHQ-5s2sZ0M8gxWsUN1fZclmJ7XU3Pclyn-qvbbv6yIf9gBoIvvM/exec';
+const DALAM_GAS=typeof google!=='undefined' && !!(google.script && google.script.run);
+function ralatPanggil(m){
+  m=String(m||'Ralat tidak diketahui.');
+  if(m.indexOf('SESI_TAMAT')>-1){ tamatSesi(); return new Error('Sesi tamat. Sila log masuk semula.'); }
+  return new Error(m.replace(/^(Exception|Error):\s*/,''));
+}
+function panggil(fn,...a){
+  if(DALAM_GAS) return new Promise((ok,gagal)=>{
+    google.script.run.withSuccessHandler(ok).withFailureHandler(e=>gagal(ralatPanggil((e&&e.message)||e)))[fn](...a);
+  });
+  return fetch(URL_API,{method:'POST',credentials:'omit',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:fn,args:a})})
+    .catch(()=>{ throw new Error('Tiada sambungan Internet. Semak sambungan dan cuba lagi.'); })
+    .then(r=>r.json().catch(()=>{ throw new Error('Pelayan tidak memberi respons yang sah ('+r.status+'). Cuba lagi sebentar.'); }))
+    .then(j=>{ if(j.ok) return j.data; throw ralatPanggil(j.error); });
+}
+function sibuk(btn,on,teks){ if(!btn) return; btn.disabled=on; if(teks) btn.textContent=teks; }
+
+/* ================= LOG MASUK / KELUAR ================= */
+function skrinLog(mesej,ok){
+  $('skrinApp').classList.add('sembunyi'); $('siapa').classList.add('sembunyi'); $('skrinLog').classList.remove('sembunyi');
+  tutupModal(); $('lKL').value=''; $('lEmel').value=ambil('en_emel')||'';
+  const m=$('lMesej'); if(mesej){ m.textContent=mesej; m.className='mesej'+(ok?' ok':''); } else m.className='mesej sembunyi';
+}
+async function logMasuk(){
+  const emel=$('lEmel').value.trim(), kl=$('lKL').value;
+  if(!emel||!kl) return skrinLog('Sila isi emel dan kata laluan.');
+  const b=$('bLog'); sibuk(b,true,'Menyemak…');
+  try{
+    const r=await panggil('logMasuk',emel,kl);
+    S.token=r.token; simpan('en_token',r.token); simpan('en_emel',emel); masuk(r.user);
+  }catch(e){ const m=$('lMesej'); m.textContent=e.message; m.className='mesej'; }
+  sibuk(b,false,'Log Masuk');
+}
+async function logKeluar(){
+  try{ await panggil('logKeluar',S.token); }catch(e){}
+  S.token=null; S.user=null; S.berita=[]; S.saya=[]; S.tSaya=[]; S.tJab=[]; S.tSemua=[]; S.kalData={}; simpan('en_token',null);
+  skrinLog('Anda telah log keluar.',true);
+}
+/* ================= LUPA KATA LALUAN ================= */
+function bukaLupa(){
+  bukaModal('<h3>Lupa Kata Laluan</h3>'+
+    '<div class="kecil-t">Masukkan emel yang didaftarkan dalam eNews. Kami akan menghantar e-mel yang mengandungi <b>emel log masuk</b> anda dan <b>pautan untuk menetapkan kata laluan baharu</b>.</div>'+
+    '<label for="fEmel">Emel berdaftar</label><input class="in" id="fEmel" type="email" autocomplete="username" value="'+esc($('lEmel').value.trim())+'">'+
+    '<div id="fMesej" class="mesej ok sembunyi"></div>'+
+    '<div class="baris"><button class="b" id="bLupa" onclick="hantarLupa()">Hantar Pautan</button><button class="b putih" onclick="tutupModal()">Tutup</button></div>'+
+    '<div class="info" style="margin-top:14px"><b>Lupa emel log masuk?</b> Emel log masuk biasanya emel rasmi (@ipgm.edu.my) yang didaftarkan oleh Super Admin. Jika masih tidak pasti, hubungi Super Admin UKOM untuk semakan.</div>',460);
+  $('fEmel').focus();
+}
+async function hantarLupa(){
+  const emel=$('fEmel').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emel)) return roti('Sila masukkan emel yang sah.',true);
+  const b=$('bLupa'); sibuk(b,true,'Menghantar…');
+  try{ const m=await panggil('mintaResetKataLaluan',emel); const el=$('fMesej'); el.textContent=m; el.classList.remove('sembunyi'); b.classList.add('sembunyi'); }
+  catch(e){ roti(e.message,true); sibuk(b,false,'Hantar Pautan'); }
+}
+function paramURL(){
+  if(!DALAM_GAS){
+    const p={}; new URLSearchParams(location.search).forEach((v,k)=>{ p[k]=v; });
+    if(p.reset){ try{ history.replaceState(null,'',location.pathname); }catch(e){} }
+    return Promise.resolve(p);
+  }
+  return new Promise(ok=>{ try{ google.script.url.getLocation(l=>ok((l&&l.parameter)||{})); }catch(e){ ok({}); } });
+}
+async function skrinReset(token){
+  $('skrinLog').classList.add('sembunyi'); $('skrinApp').classList.add('sembunyi'); $('skrinReset').classList.remove('sembunyi');
+  S.resetToken=token;
+  try{
+    const r=await panggil('semakTokenReset',token);
+    $('rInfo').innerHTML='Tetapkan kata laluan baharu untuk <b>'+esc(r.nama)+'</b> ('+esc(r.emel)+').';
+    $('rBorang').classList.remove('sembunyi'); $('rKL').focus();
+  }catch(e){ $('rInfo').textContent=''; const m=$('rMesej'); m.textContent=e.message; m.className='mesej'; }
+}
+async function hantarReset(){
+  const a=$('rKL').value;
+  if(a.length<8) return roti('Kata laluan mesti sekurang-kurangnya 8 aksara.',true);
+  if(a!==$('rKL2').value) return roti('Pengesahan kata laluan tidak sepadan.',true);
+  const b=$('bReset'); sibuk(b,true,'Menyimpan…');
+  try{
+    const r=await panggil('tetapSemulaKataLaluan',S.resetToken,a);
+    S.resetToken=null; simpan('en_emel',r.emel);
+    $('skrinReset').classList.add('sembunyi');
+    skrinLog('Kata laluan baharu telah disimpan. Sila log masuk.',true);
+  }catch(e){ roti(e.message,true); sibuk(b,false,'Simpan Kata Laluan'); }
+}
+function keLogMasuk(){ $('skrinReset').classList.add('sembunyi'); skrinLog(); }
+function tamatSesi(){ S.token=null; simpan('en_token',null); skrinLog('Sesi tamat. Sila log masuk semula.'); }
+
+/* ================= NAVIGASI ================= */
+const SEKSYEN = ['borang','saya','semak','tSaya','borangT','bJab','tJab','urus','kalendar','analisis','sumber','jabatan','pengguna','tetapan'];
+function masuk(u){
+  S.user=u;
+  $('skrinLog').classList.add('sembunyi'); $('skrinApp').classList.remove('sembunyi'); $('siapa').classList.remove('sembunyi');
+  $('lblNama').textContent=u.nama; $('lblPeranan').textContent=LABEL_PERANAN[u.peranan]||u.peranan;
+  $('lblMaks').textContent='(maksimum '+S.cfg.maksGambar+')';
+  $('lblMinHari').textContent=S.cfg.minHari;
+  $('lblMaksPdf').textContent='(PDF, maksimum '+S.cfg.maksLampiranMB+' MB)';
+  const adminTab=[['semak','📋 Senarai Berita'],['borang','➕ Tambah Berita'],['urus','🎥 Urus Tempahan'],['kalendar','📅 Kalendar Live'],['analisis','📊 Analisis'],['sumber','🧰 Krew & Peralatan']];
+  const tab = superadmin() ? adminTab.concat([['jabatan','🏛️ Jabatan'],['pengguna','👥 Pengguna'],['tetapan','⚙️ Tetapan FB']])
+    : admin() ? adminTab.concat([['tetapan','⚙️ Tetapan FB']])
+    : atasan() ? [['saya','📝 Berita Saya'],['borang','➕ Tambah Berita'],['tSaya','🎥 Tempahan Live'],['bJab','📰 Semua Berita'],['tJab','🏢 Semua Tempahan'],['kalendar','📅 Kalendar Live']]
+    : ketua() ? [['saya','📝 Berita Saya'],['borang','➕ Tambah Berita'],['tSaya','🎥 Tempahan Live'],['bJab','📰 Berita Jabatan'],['tJab','🏢 Tempahan Jabatan'],['kalendar','📅 Kalendar Live']]
+    : [['saya','📝 Berita Saya'],['borang','➕ Tambah Berita'],['tSaya','🎥 Tempahan Live'],['kalendar','📅 Kalendar Live']];   // pensyarah, staf & sinergi
+  $('tab').innerHTML=tab.map(t=>'<button id="t-'+t[0]+'" onclick="tekanTab(\''+t[0]+'\')">'+t[1]+'</button>').join('');
+  kosongkanBorang();
+  muatSumber();
+  buka(tab[0][0]);
+}
+async function muatSumber(){
+  try{ S.sumber=await panggil('senaraiSumber',S.token); $('dlLokasi').innerHTML=S.sumber.lokasi.map(l=>'<option value="'+esc(l)+'">').join(''); }
+  catch(e){ /* senarai sumber tidak kritikal */ }
+}
+function tekanTab(p){ if(p==='borang') kosongkanBorang(); buka(p); }
+function buka(p){
+  S.tabAktif=p;
+  const induk = p==='borangT' ? (admin()?'urus':'tSaya') : p;
+  SEKSYEN.forEach(x=>{
+    $('p-'+x).classList.toggle('sembunyi',x!==p);
+    const t=$('t-'+x); if(t) t.classList.toggle('aktif',x===induk);
+  });
+  if(p==='saya') muatSaya();
+  if(p==='semak') muatSemak();
+  if(p==='tSaya') muatTSaya();
+  if(p==='tJab') muatTJab();
+  if(p==='bJab') muatBJab();
+  if(p==='jabatan') muatJabatan();
+  if(p==='urus') muatUrus();
+  if(p==='kalendar') muatKalendar();
+  if(p==='analisis') muatAnalisis();
+  if(p==='sumber') muatSumberAdmin();
+  if(p==='pengguna') muatPengguna();
+  if(p==='tetapan') muatFB();
+}
+function senaraiUtama(){ buka(admin()?'semak':'saya'); }
+
+/* ================= BORANG BERITA ================= */
+function kosongkanBorang(){
+  S.edit=null; S.gambar=[]; S.dariTempahan=null;
+  ['hTajuk','hTarikh','hTempat','hKet'].forEach(id=>$(id).value='');
+  isiJab('hJabatan','hJabLain',S.user.jabatan);
+  $('bTajukBorang').textContent='Tambah Berita'; $('bSimpan').textContent='Hantar Berita';
+  $('bBatal').classList.add('sembunyi'); $('bInfo').innerHTML='';
+  lukisGambar();
+}
+function suntingBerita(id){
+  const b=(admin()?S.berita:S.saya).find(x=>x.id===id); if(!b) return;
+  tutupModal(); buka('borang');
+  S.edit=b.id; S.dariTempahan=null; S.gambar=b.gambar.map(g=>({id:g}));
+  $('hTajuk').value=b.tajuk; $('hTarikh').value=b.tarikhProgram; $('hTempat').value=b.tempat; $('hKet').value=b.keterangan;
+  isiJab('hJabatan','hJabLain',b.jabatan);
+  $('bTajukBorang').textContent='Sunting Berita'; $('bSimpan').textContent='Simpan Perubahan';
+  $('bBatal').classList.remove('sembunyi');
+  let info='';
+  if(!admin() && b.status==='Ditolak') info='Berita ini ditolak: <b>'+esc(b.catatanAdmin)+'</b><br>Selepas disimpan, berita akan dihantar semula kepada admin.';
+  if(admin() && b.status==='Diterbitkan') info='Berita ini telah diterbitkan. Suntingan hanya mengubah rekod dalam sistem, bukan hantaran di Facebook.';
+  if(admin() && b.emel!==S.user.emel) info+=(info?'<br>':'')+'Pengirim asal: '+esc(b.nama)+' ('+esc(b.emel)+')';
+  $('bInfo').innerHTML=info?'<div class="info">'+info+'</div>':'';
+  lukisGambar(); window.scrollTo(0,0);
+}
+function batalSunting(){ kosongkanBorang(); senaraiUtama(); }
+
+$('hGambar').addEventListener('change',e=>{
+  const fail=Array.from(e.target.files||[]); e.target.value='';
+  const maks=S.cfg.maksGambar; let lebih=false;
+  fail.forEach(f=>{ if(S.gambar.length < maks) S.gambar.push({fail:f,url:URL.createObjectURL(f)}); else lebih=true; });
+  if(lebih) roti('Maksimum '+maks+' gambar.',true);
+  lukisGambar();
+});
+function lukisGambar(){
+  $('pratonton').innerHTML=S.gambar.map((g,i)=>'<div style="background-image:url('+(g.url||img(g.id,200))+')"><button title="Buang" aria-label="Buang gambar" onclick="buangGambar('+i+')">×</button></div>').join('');
+}
+function buangGambar(i){ S.gambar.splice(i,1); lukisGambar(); }
+function kecilkan(fail){
+  return new Promise((ok,gagal)=>{
+    const im=new Image(); const u=URL.createObjectURL(fail);
+    im.onload=()=>{
+      const s=Math.min(1,1600/Math.max(im.width,im.height));
+      const c=document.createElement('canvas'); c.width=Math.round(im.width*s); c.height=Math.round(im.height*s);
+      const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height);
+      URL.revokeObjectURL(u); ok(c.toDataURL('image/jpeg',0.85).split(',')[1]);
+    };
+    im.onerror=()=>gagal(new Error('Gambar tidak dapat dibaca: '+fail.name));
+    im.src=u;
+  });
+}
+async function simpanBerita(){
+  const d={ id:S.edit, tajuk:$('hTajuk').value.trim(), tarikhProgram:$('hTarikh').value, tempat:$('hTempat').value.trim(),
+            jabatan:nilaiJab('hJabatan','hJabLain'), keterangan:$('hKet').value.trim(), idTempahan:S.edit?'':(S.dariTempahan||'') };
+  if(opsyenLain() && $('hJabatan').value===opsyenLain() && !d.jabatan) return roti('Sila nyatakan nama penganjur dalam kotak "Lain-lain".',true);
+  if(!d.tajuk||!d.tarikhProgram||!d.tempat||!d.jabatan||!d.keterangan) return roti('Sila lengkapkan semua ruangan bertanda *.',true);
+  if(!S.gambar.length) return roti('Sila pilih sekurang-kurangnya 1 gambar.',true);
+  const b=$('bSimpan'), label=b.textContent;
+  try{
+    const baru=S.gambar.filter(g=>!g.id);
+    for(let i=0; i < baru.length; i++){
+      sibuk(b,true,'Memuat naik gambar '+(i+1)+'/'+baru.length+'…');
+      baru[i].id=await panggil('muatNaikGambar',S.token,{mime:'image/jpeg',data:await kecilkan(baru[i].fail),nama:baru[i].fail.name});
+    }
+    d.gambar=S.gambar.map(g=>g.id);
+    sibuk(b,true,'Menyimpan…');
+    await panggil('simpanBerita',S.token,d);
+    roti(S.edit?'Perubahan disimpan.':'Berita berjaya dihantar. Terima kasih!');
+    const dariT=!!S.dariTempahan;
+    kosongkanBorang();
+    if(dariT && !admin()) buka('tSaya'); else senaraiUtama();
+  }catch(e){ roti(e.message,true); }
+  sibuk(b,false,label);
+}
+
+/* ================= KAD BERITA ================= */
+function kad(b,butang,klik){
+  return '<div class="item"'+(klik?' style="cursor:pointer" onclick="'+klik+'"':'')+'>'+
+    '<div class="gb" style="'+(b.gambar[0]?'background-image:url('+img(b.gambar[0])+')':'')+'"></div>'+
+    '<div class="isi">'+lencana(b.status)+(b.fbPostId?' <span class="kecil-t">📘 auto</span>':'')+'<h3>'+esc(b.tajuk)+'</h3>'+
+    '<div class="kecil-t">🗓️ '+esc(tarikh(b.tarikhProgram))+' · 📍 '+esc(b.tempat)+'</div>'+
+    '<div class="kecil-t">🏢 '+esc(b.jabatan||'—')+'</div>'+
+    '<div class="kecil-t">Dihantar '+esc(b.tarikhHantar)+(b.emel!==S.user.emel?' oleh '+esc(b.nama):'')+'</div>'+
+    (b.status==='Ditolak'&&b.catatanAdmin?'<div class="nota"><b>Catatan admin:</b> '+esc(b.catatanAdmin)+'</div>':'')+
+    '</div>'+(butang?'<div class="kaki">'+butang+'</div>':'')+'</div>';
+}
+async function padam(id){
+  if(!confirm('Padam berita ini? Gambar juga akan dipadam.')) return;
+  try{ await panggil('padamBerita',S.token,id); roti('Berita dipadam.'); tutupModal(); senaraiUtama(); }
+  catch(e){ roti(e.message,true); }
+}
+
+/* ================= BERITA SAYA ================= */
+async function muatSaya(){
+  $('senaraiSaya').innerHTML='<div class="kosong">Memuatkan…</div>';
+  try{
+    S.saya=await panggil('beritaSaya',S.token);
+    if(!S.saya.length){ $('senaraiSaya').innerHTML='<div class="kosong">Belum ada berita. Klik <b>➕ Tambah Berita</b> untuk mula.</div>'; return; }
+    $('senaraiSaya').innerHTML=S.saya.map(b=>{
+      const terbit=b.status==='Diterbitkan';
+      const btn = terbit
+        ? '<span class="kunci">🔒 Telah diterbitkan</span>'+(b.pautanFB?'<a class="b kecil" style="margin-left:auto" href="'+esc(urlSelamat(b.pautanFB))+'" target="_blank" rel="noopener">Lihat di Facebook</a>':'')
+        : '<button class="b kecil" onclick="suntingBerita(\''+b.id+'\')">✎ '+(b.status==='Ditolak'?'Sunting & Hantar Semula':'Sunting')+'</button>'+
+          '<button class="b merah kecil" onclick="padam(\''+b.id+'\')">Padam</button>';
+      return kad(b,btn);
+    }).join('');
+  }catch(e){ $('senaraiSaya').innerHTML='<div class="kosong">'+esc(e.message)+'</div>'; }
+}
+
+/* ================= ADMIN: SENARAI BERITA ================= */
+async function muatSemak(){
+  $('senaraiSemak').innerHTML='<div class="kosong">Memuatkan…</div>';
+  try{
+    S.berita=await panggil('semuaBerita',S.token);
+    const pilih=$('tapisJab').value;
+    const jab=jabatanList(); S.berita.forEach(b=>{ if(b.jabatan && jab.indexOf(b.jabatan)<0) jab.push(b.jabatan); });
+    $('tapisJab').innerHTML=pilihan(jab,pilih,'Semua Jabatan/Unit');
+    lukisSemak();
+  }catch(e){ $('senaraiSemak').innerHTML='<div class="kosong">'+esc(e.message)+'</div>'; }
+}
+function lukisSemak(){
+  const q=$('cari').value.toLowerCase(), j=$('tapisJab').value;
+  const asas=S.berita.filter(b=>(!j||b.jabatan===j) && (!q||[b.tajuk,b.nama,b.tempat,b.emel].join(' ').toLowerCase().indexOf(q)>-1));
+  $('tapis').innerHTML=['Baharu','Diterbitkan','Ditolak','Semua'].map(s=>{
+    const n=s==='Semua'?asas.length:asas.filter(b=>b.status===s).length;
+    return '<button class="'+(S.tapis===s?'aktif':'')+'" onclick="S.tapis=\''+s+'\';lukisSemak()">'+s+' ('+n+')</button>';
+  }).join('');
+  const r=asas.filter(b=>S.tapis==='Semua'||b.status===S.tapis);
+  $('senaraiSemak').innerHTML=r.length?r.map(b=>kad(b,'',"bukaBerita('"+b.id+"')")).join(''):'<div class="kosong">Tiada berita.</div>';
+}
+function kapsyen(b){ return b.tajuk+'\n\n'+b.keterangan+'\n\n🗓️ '+tarikh(b.tarikhProgram)+'\n📍 '+b.tempat+'\n🏢 '+b.jabatan+'\n\n'+S.cfg.hashtag; }
+function bukaBerita(id){
+  const b=S.berita.find(x=>x.id===id); if(!b) return;
+  bukaModal('<h3>'+esc(b.tajuk)+'</h3>'+lencana(b.status)+
+    '<div class="kecil-t" style="margin-top:6px">Oleh '+esc(b.nama)+' ('+esc(b.emel)+') · '+esc(b.tarikhHantar)+'</div>'+
+    '<div class="kecil-t">🏢 '+esc(b.jabatan||'—')+(b.dikemaskini?' · Disunting '+esc(b.dikemaskini):'')+'</div>'+
+    '<div class="galeri">'+b.gambar.map(g=>'<a href="https://drive.google.com/uc?export=download&id='+encodeURIComponent(g)+'" target="_blank" title="Muat turun" aria-label="Muat turun gambar" style="background-image:url('+img(g,300)+')"></a>').join('')+'</div>'+
+    '<div class="kecil-t">Klik gambar untuk muat turun.</div>'+
+    '<label for="kap">Kapsyen untuk Facebook <span class="kecil-t">(boleh disunting sebelum diterbitkan)</span></label><textarea class="kapsyen" id="kap">'+esc(kapsyen(b))+'</textarea>'+
+    '<div class="baris"><button class="b putih kecil" onclick="salin()">📋 Salin Kapsyen</button><button class="b putih kecil" onclick="suntingBerita(\''+b.id+'\')">✎ Sunting Berita</button></div>'+
+    (b.fbPostId
+      ? '<div class="fbok">✅ Telah diterbitkan terus ke Facebook'+(b.pautanFB?' · <a href="'+esc(urlSelamat(b.pautanFB))+'" target="_blank" rel="noopener">Buka hantaran ↗</a>':'')+'</div>'
+      : (S.cfg.fbAuto
+          ? '<div class="baris"><button class="b fb" id="bTerbitFB" onclick="terbitFB(\''+b.id+'\')">📘 Terbit Terus ke Facebook</button></div>'
+          : '<div class="kecil-t" style="margin-top:10px">💡 Untuk terbit dengan satu klik, tetapkan sambungan di tab <b>⚙️ Tetapan FB</b>.</div>'))+
+    '<label for="mFB">Pautan hantaran Facebook (jika diterbitkan secara manual)</label><input class="in" id="mFB" value="'+esc(b.pautanFB)+'" placeholder="https://www.facebook.com/…">'+
+    '<label for="mCat">Catatan kepada pengirim (wajib jika ditolak)</label><input class="in" id="mCat" value="'+esc(b.catatanAdmin)+'">'+
+    '<div class="baris">'+
+      '<button class="b hijau" onclick="tindakan(\''+b.id+'\',\'Diterbitkan\')">✔ Tandakan Diterbitkan (manual)</button>'+
+      '<button class="b merah" onclick="tindakan(\''+b.id+'\',\'Ditolak\')">✖ Tolak</button>'+
+      (b.status!=='Baharu'?'<button class="b putih" onclick="tindakan(\''+b.id+'\',\'Baharu\')">↺ Set Baharu</button>':'')+
+      '<button class="b merah" onclick="padam(\''+b.id+'\')">Padam</button>'+
+      '<button class="b putih" style="margin-left:auto" onclick="tutupModal()">Tutup</button>'+
+    '</div>');
+}
+function salin(){
+  const t=$('kap').value;
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>roti('Kapsyen disalin.'),()=>salinLama(t)); else salinLama(t);
+}
+function salinLama(t){ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); roti('Kapsyen disalin.'); }
+async function tindakan(id,status){
+  const fb=$('mFB').value.trim(), cat=$('mCat').value.trim();
+  if(status==='Ditolak' && !cat) return roti('Sila isi catatan sebab ditolak.',true);
+  if(status==='Diterbitkan' && !fb && !confirm('Tandakan diterbitkan tanpa pautan Facebook?')) return;
+  try{ await panggil('kemaskiniStatus',S.token,id,status,fb,cat); roti('Status: '+status); tutupModal(); muatSemak(); }
+  catch(e){ roti(e.message,true); }
+}
+async function terbitFB(id){
+  const b=S.berita.find(x=>x.id===id); if(!b) return;
+  const teks=$('kap').value.trim();
+  if(!teks) return roti('Kapsyen tidak boleh kosong.',true);
+  if(!confirm('Terbitkan "'+b.tajuk+'" terus ke Page Facebook sekarang?\n\n'+b.gambar.length+' gambar akan dimuat naik.')) return;
+  const btn=$('bTerbitFB'); sibuk(btn,true,'Menerbitkan ke Facebook… (sehingga 1 minit)');
+  try{
+    const r=await panggil('terbitFacebook',S.token,id,teks);
+    tutupModal(); roti('Berjaya diterbitkan ke Facebook! 🎉'); await muatSemak();
+    if(r.pautanFB) window.open(r.pautanFB,'_blank');
+  }catch(e){ roti(e.message,true); sibuk(btn,false,'📘 Terbit Terus ke Facebook'); }
+}
+
+/* ================= TEMPAHAN: BORANG ================= */
+let pemasaSlot=null, nomborSlot=0;
+function parseAlat(s){ const o={}; String(s||'').replace(/([A-Za-z0-9_-]+)\s*[×x]\s*(\d+)/g,(m,k,n)=>{ o[k]=+n; return m; }); return o; }
+function teksAlat(s){
+  const o=parseAlat(s), k=Object.keys(o); if(!k.length) return '—';
+  return k.map(x=>{ const a=S.sumber.peralatan.find(p=>p.kod===x); return (a?a.nama:x)+' ×'+o[x]; }).join(', ');
+}
+function baruTempahan(tkh,mula,tamat){ buka('borangT'); kosongkanBorangT(tkh); if(mula){ $('tMula').value=mula; $('tTamat').value=tamat||''; } if(tkh) ubahSlot(); window.scrollTo(0,0); }
+function batalBorangT(){ S.editT=null; buka(admin()?'urus':'tSaya'); }
+function kosongkanBorangT(tkh){
+  S.editT=null; S.lampiran=null;
+  ['tProgram','tLokasi','tMula','tTamat','tPeserta','tCatatan','tTelefon'].forEach(id=>$(id).value='');
+  $('tTarikh').value=tkh||''; $('tPenghubung').value=S.user.nama;
+  isiJab('tJabatan','tJabLain',S.user.jabatan);
+  lukisPilihanT(null);
+  $('tTajukBorang').textContent='Tempahan Siaran Langsung / Liputan UKOM'; $('bSimpanT').textContent='Hantar Tempahan';
+  $('tInfo').innerHTML=admin()?'<div class="info">Tempahan oleh admin tidak tertakluk kepada had minimum hari bekerja.</div>'
+    :'<div class="info">Tempahan perlu dibuat sekurang-kurangnya <b>'+S.cfg.minHari+' hari bekerja</b> sebelum program. Keputusan dimaklumkan melalui e-mel.</div>';
+  $('tSlot').innerHTML=''; lukisLampiran();
+}
+function lukisPilihanT(t){
+  const LEGASI={'Siaran Langsung':'Live','Rakaman Sahaja':'Rakaman','Hibrid (Live + Zoom/Meet)':'Hybrid'};
+  const jenis=t?(LEGASI[t.jenis]||t.jenis):S.cfg.jenis[0];
+  const plat=t?String(t.platform||'').split(', '):[S.cfg.platform[0]];
+  const alat=t?parseAlat(t.peralatan):{};
+  $('tJenis').innerHTML=S.cfg.jenis.map(j=>'<label class="pil"><input type="radio" name="tJenis" value="'+esc(j)+'"'+(j===jenis?' checked':'')+'> '+esc(j)+'</label>').join('');
+  $('tPlatform').innerHTML=S.cfg.platform.map(p=>'<label class="cek"><input type="checkbox" class="tPlat" value="'+esc(p)+'"'+(plat.indexOf(p)>-1?' checked':'')+'> '+esc(p)+'</label>').join('');
+  const senarai=S.sumber.peralatan.filter(a=>a.aktif||alat[a.kod]);
+  $('tAlat').innerHTML=senarai.length?senarai.map(a=>
+    '<div class="cek alatR"><label><input type="checkbox" class="tAlatC" data-kod="'+esc(a.kod)+'"'+(alat[a.kod]?' checked':'')+' onchange="ubahSlot()"> '+esc(a.nama)+'</label>'+
+    '<input type="number" class="in qty" id="q-'+esc(a.kod)+'" min="1" max="'+a.kuantiti+'" value="'+(alat[a.kod]||1)+'" onchange="ubahSlot()" aria-label="Kuantiti '+esc(a.nama)+'">'+
+    '<span class="kecil-t">/ '+a.kuantiti+'</span></div>').join('')
+    :'<div class="kecil-t">Senarai peralatan belum ditetapkan oleh UKOM.</div>';
+}
+function dataBorangT(){
+  const alat={};
+  document.querySelectorAll('.tAlatC:checked').forEach(c=>{ const k=c.dataset.kod; alat[k]=Math.max(1,parseInt($('q-'+k).value,10)||1); });
+  const j=document.querySelector('input[name="tJenis"]:checked');
+  return { id:S.editT, program:$('tProgram').value.trim(), jabatan:nilaiJab('tJabatan','tJabLain'), lokasi:$('tLokasi').value.trim(),
+    tarikh:$('tTarikh').value, masaMula:$('tMula').value.slice(0,5), masaTamat:$('tTamat').value.slice(0,5),
+    jenis:j?j.value:'', platform:[...document.querySelectorAll('.tPlat:checked')].map(c=>c.value), peralatan:alat,
+    peserta:$('tPeserta').value, penghubung:$('tPenghubung').value.trim(), telefon:$('tTelefon').value.trim(),
+    catatan:$('tCatatan').value.trim(), lampiran:S.lampiran?S.lampiran.id:'' };
+}
+function ubahSlot(){ clearTimeout(pemasaSlot); pemasaSlot=setTimeout(semakSlotSekarang,500); }
+['tTarikh','tMula','tTamat','tLokasi'].forEach(id=>$(id).addEventListener('change',ubahSlot));
+async function semakSlotSekarang(){
+  const d=dataBorangT(), box=$('tSlot');
+  if(!d.tarikh||!d.masaMula||!d.masaTamat){ box.innerHTML=''; return; }
+  const no=++nomborSlot; box.innerHTML='<div class="kecil-t" style="margin-top:10px">Menyemak slot…</div>';
+  try{ const r=await panggil('semakSlot',S.token,d,S.editT||''); if(no===nomborSlot) box.innerHTML=lukisSlot(r,!d.lokasi); }
+  catch(e){ if(no===nomborSlot) box.innerHTML='<div class="slot"><div class="sl sekat">'+esc(e.message)+'</div></div>'; }
+}
+function lukisSlot(r,tiadaLokasi){
+  let h='';
+  r.sekat.forEach(m=>h+='<div class="sl sekat"><b>Tidak boleh ditempah:</b> '+esc(m)+'</div>');
+  r.amaran.forEach(m=>h+='<div class="sl amaran"><b>Amaran:</b> '+esc(m)+'</div>');
+  r.info.forEach(m=>h+='<div class="sl info"><b>Makluman:</b> '+esc(m)+'</div>');
+  if(!r.sekat.length) h='<div class="sl ok"><b>✓ Slot tersedia.</b> '+(tiadaLokasi?'Isi lokasi untuk semakan lokasi.':'Tiada tempahan diluluskan yang bertembung di lokasi ini.')+'</div>'+h;
+  return '<div class="slot">'+h+'</div>';
+}
+$('tFail').addEventListener('change',async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  if(f.type!=='application/pdf') return roti('Lampiran mesti fail PDF.',true);
+  if(f.size>S.cfg.maksLampiranMB*1048576) return roti('Saiz lampiran melebihi '+S.cfg.maksLampiranMB+' MB.',true);
+  $('tLampiran').textContent='Memuat naik '+f.name+'…';
+  try{ const data=await bacaBase64(f); S.lampiran=await panggil('muatNaikLampiran',S.token,{mime:'application/pdf',data:data,nama:f.name}); roti('Lampiran dimuat naik.'); }
+  catch(err){ roti(err.message,true); }
+  lukisLampiran();
+});
+function bacaBase64(f){ return new Promise((ok,gagal)=>{ const r=new FileReader(); r.onload=()=>ok(String(r.result).split(',')[1]); r.onerror=()=>gagal(new Error('Fail tidak dapat dibaca.')); r.readAsDataURL(f); }); }
+function lukisLampiran(){
+  $('tLampiran').innerHTML=S.lampiran?'📎 <a href="'+pautanFail(S.lampiran.id)+'" target="_blank" rel="noopener">'+esc(S.lampiran.nama||'Lampiran (PDF)')+'</a> <button class="b merah kecil" onclick="S.lampiran=null;lukisLampiran()">Buang</button>':'';
+}
+async function simpanTempahan(){
+  const d=dataBorangT();
+  if(opsyenLain() && $('tJabatan').value===opsyenLain() && !d.jabatan) return roti('Sila nyatakan nama penganjur dalam kotak "Lain-lain".',true);
+  if(!d.program||!d.jabatan||!d.lokasi||!d.tarikh||!d.masaMula||!d.masaTamat||!d.penghubung||!d.telefon) return roti('Sila lengkapkan semua ruangan bertanda *.',true);
+  if(d.masaTamat<=d.masaMula) return roti('Masa tamat mesti selepas masa mula.',true);
+  if(!d.platform.length) return roti('Pilih sekurang-kurangnya satu platform siaran.',true);
+  const b=$('bSimpanT'), label=b.textContent; sibuk(b,true,'Menghantar…');
+  try{
+    await panggil('simpanTempahan',S.token,d);
+    roti(S.editT?'Tempahan dikemas kini.':'Tempahan berjaya dihantar. Notifikasi e-mel telah dihantar.');
+    S.editT=null; S.kalData={}; buka(admin()?'urus':'tSaya');
+  }catch(e){ roti(e.message,true); }
+  sibuk(b,false,label);
+}
+function cariT(id){ return S.tSaya.concat(S.tJab,S.tSemua).find(x=>x.id===id); }
+function suntingTempahan(id){
+  const t=cariT(id); if(!t) return;
+  tutupModal(); buka('borangT'); kosongkanBorangT();
+  S.editT=t.id; S.lampiran=t.lampiran?{id:t.lampiran,nama:'Lampiran sedia ada (PDF)'}:null;
+  $('tProgram').value=t.program; $('tLokasi').value=t.lokasi; $('tTarikh').value=t.tarikh; $('tMula').value=t.masaMula; $('tTamat').value=t.masaTamat;
+  $('tPeserta').value=t.peserta; $('tPenghubung').value=t.penghubung; $('tTelefon').value=t.telefon; $('tCatatan').value=t.catatan;
+  isiJab('tJabatan','tJabLain',t.jabatan);
+  lukisPilihanT(t);
+  $('tTajukBorang').textContent='Sunting Tempahan';
+  $('bSimpanT').textContent=(!admin()&&t.status==='Perlu Pindaan')?'Simpan & Hantar Semula':'Simpan Perubahan';
+  let info='';
+  if(t.status==='Perlu Pindaan'&&t.catatanAdmin) info+='<div class="nota" style="margin-bottom:6px"><b>Catatan UKOM:</b> '+esc(t.catatanAdmin)+'</div>';
+  if(admin()&&t.emel!==S.user.emel) info+='<div class="info">Pemohon asal: '+esc(t.nama)+' ('+esc(t.emel)+') · Status: '+esc(t.status)+'</div>';
+  $('tInfo').innerHTML=info; lukisLampiran(); semakSlotSekarang(); window.scrollTo(0,0);
+}
+
+/* ================= TEMPAHAN: KAD & BUTIRAN ================= */
+function blokTkh(s,kelabu){ const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s||''); return '<div class="tkh'+(kelabu?' kelabu':'')+'"><small>'+(m?BLN_B[+m[2]-1]:'')+'</small><b>'+(m?+m[3]:'?')+'</b></div>'; }
+function labelSt(s){ return (!admin()&&s==='Baharu')?'Dalam Semakan':s; }
+function lencanaT(s){ return '<span class="lencana s-'+esc(String(s).split(' ')[0])+'">'+esc(labelSt(s))+'</span>'; }
+function kadT(t,butang){
+  const lepas=['Selesai','Dibatalkan','Ditolak'].indexOf(t.status)>-1;
+  let nota='';
+  if((t.status==='Perlu Pindaan'||t.status==='Ditolak')&&t.catatanAdmin) nota='<div class="nota"><b>Catatan UKOM:</b> '+esc(t.catatanAdmin)+'</div>';
+  else if(t.status==='Dibatalkan'&&t.catatanAdmin) nota='<div class="kecil-t">'+esc(t.catatanAdmin)+'</div>';
+  else if(t.status==='Diluluskan') nota='<div class="info" style="margin:4px 0 0">'+(t.pautanSiaran?'Pautan siaran: <a href="'+esc(urlSelamat(t.pautanSiaran))+'" target="_blank" rel="noopener">buka ↗</a>':'Pautan siaran akan dikemas kini oleh UKOM sebelum program.')+'</div>';
+  return '<div class="item"><div class="kepalaT">'+blokTkh(t.tarikh,lepas)+
+    '<div style="min-width:0;display:flex;flex-direction:column;gap:4px">'+lencanaT(t.status)+'<h3>'+esc(t.program)+'</h3></div></div>'+
+    '<div class="isi"><div class="kecil-t">🕘 '+esc(julatMasa(t))+' · 📍 '+esc(t.lokasi)+'</div>'+
+    '<div class="kecil-t">🎥 '+esc(t.jenis)+(t.platform?' · '+esc(t.platform):'')+'</div>'+
+    '<div class="kecil-t">🏢 '+esc(t.jabatan)+(t.emel!==S.user.emel?' · '+esc(t.nama):'')+'</div>'+
+    (t.krew?'<div class="kecil-t">👥 Krew: '+esc(t.krew)+'</div>':'')+nota+'</div>'+
+    '<div class="kaki"><button class="b putih kecil" onclick="butiranT(\''+t.id+'\')">Butiran</button>'+(butang||'')+'</div></div>';
+}
+function jadualT(t){
+  const r=[['Program',t.program],['Jabatan/Unit',t.jabatan],['Tarikh',tarikhPanjang(t.tarikh)],['Masa',julatMasa(t)],['Lokasi',t.lokasi],
+    ['Jenis liputan',t.jenis],['Platform',t.platform||'—'],['Peralatan',teksAlat(t.peralatan)],['Anggaran peserta',t.peserta||'—'],
+    ['Pegawai penghubung',t.penghubung+(t.telefon?' · '+t.telefon:'')],['Pemohon',t.nama+' ('+t.emel+')'],['Dihantar',t.tarikhHantar]];
+  if(t.krew) r.push(['Krew',t.krew]);
+  if(t.catatan) r.push(['Catatan pemohon',t.catatan]);
+  if(t.tempohRakaman) r.push(['Tempoh rakaman',t.tempohRakaman]);
+  if(t.penilaian) r.push(['Maklum balas',t.penilaian+'/5'+(t.ulasan?' — '+t.ulasan:'')]);
+  if(t.dikemaskini) r.push(['Dikemas kini',t.dikemaskini]);
+  return '<dl class="dl">'+r.map(x=>'<dt>'+esc(x[0])+'</dt><dd>'+esc(x[1])+'</dd>').join('')+
+    (t.lampiran?'<dt>Atur cara</dt><dd><a href="'+pautanFail(t.lampiran)+'" target="_blank" rel="noopener">Buka lampiran PDF ↗</a></dd>':'')+
+    (t.pautanSiaran?'<dt>Pautan siaran</dt><dd><a href="'+esc(urlSelamat(t.pautanSiaran))+'" target="_blank" rel="noopener">'+esc(t.pautanSiaran)+'</a></dd>':'')+'</dl>';
+}
+function butiranT(id){
+  const t=cariT(id); if(!t) return;
+  bukaModal('<h3>'+esc(t.program)+'</h3>'+lencanaT(t.status)+jadualT(t)+
+    (t.catatanAdmin?'<div class="nota" style="margin-top:10px"><b>Catatan UKOM:</b> '+esc(t.catatanAdmin)+'</div>':'')+
+    '<div class="baris">'+(admin()?'<button class="b kecil" onclick="bukaUrus(\''+t.id+'\')">Urus Tempahan</button>':'')+
+    '<button class="b putih" style="margin-left:auto" onclick="tutupModal()">Tutup</button></div>');
+}
+
+/* ================= TEMPAHAN SAYA ================= */
+async function muatTSaya(){
+  $('senaraiTSaya').innerHTML='<div class="kosong">Memuatkan…</div>';
+  try{
+    S.tSaya=await panggil('tempahanSaya',S.token);
+    if(!S.tSaya.length){ $('senaraiTSaya').innerHTML='<div class="kosong">Belum ada tempahan. Klik <b>+ Tempahan Baharu</b> untuk mula.</div>'; return; }
+    $('senaraiTSaya').innerHTML=S.tSaya.map(t=>kadT(t,butangTSaya(t))).join('');
+  }catch(e){ $('senaraiTSaya').innerHTML='<div class="kosong">'+esc(e.message)+'</div>'; }
+}
+function butangTSaya(t){
+  const id="'"+t.id+"'";
+  if(t.status==='Baharu') return '<button class="b kecil" onclick="suntingTempahan('+id+')">✎ Sunting</button><button class="b merah kecil" onclick="batalT('+id+')">Batal</button>';
+  if(t.status==='Perlu Pindaan') return '<button class="b kecil" onclick="suntingTempahan('+id+')">✎ Sunting & Hantar Semula</button><button class="b merah kecil" onclick="batalT('+id+')">Batal</button>';
+  if(t.status==='Diluluskan') return '<button class="b merah kecil" onclick="batalT('+id+')">Batal Tempahan</button>';
+  if(t.status==='Selesai') return (t.idBerita?'<span class="kunci">✓ Berita dihantar</span>':'<button class="b hijau kecil" onclick="janaBerita('+id+')">📝 Jana Berita eNews</button>')+
+    (t.pautanSiaran?'<a class="b putih kecil" href="'+esc(urlSelamat(t.pautanSiaran))+'" target="_blank" rel="noopener">Tonton Rakaman</a>':'')+
+    (t.penilaian?'<span class="kecil-t">Penilaian anda: '+'★'.repeat(+t.penilaian)+'</span>':'<button class="b putih kecil" onclick="bukaMaklumBalas('+id+')">Beri Maklum Balas</button>');
+  return '';
+}
+async function batalT(id){
+  const sebab=prompt('Batalkan tempahan ini?\nNyatakan sebab (pilihan):',''); if(sebab===null) return;
+  try{ await panggil('batalTempahan',S.token,id,sebab); roti('Tempahan dibatalkan.'); tutupModal(); S.kalData={}; buka(admin()?'urus':'tSaya'); }
+  catch(e){ roti(e.message,true); }
+}
+function janaBerita(id){
+  const t=cariT(id); if(!t) return;
+  buka('borang'); kosongkanBorang();
+  S.dariTempahan=t.id;
+  $('hTajuk').value=t.program; $('hTarikh').value=t.tarikh; $('hTempat').value=t.lokasi;
+  isiJab('hJabatan','hJabLain',t.jabatan);
+  $('hKet').value=t.program+' telah berlangsung pada '+tarikhPanjang(t.tarikh)+' bertempat di '+t.lokasi+'. '+
+    (t.jenis!=='Rakaman'&&t.jenis!=='Rakaman Sahaja'&&String(t.platform||'').replace(/,?\s*Rakaman/,'')?'Program ini turut disiarkan secara langsung melalui '+String(t.platform).split(', ').filter(p=>p!=='Rakaman').join(', ')+' oleh Unit Komunikasi Multimedia (UKOM). ':'')+
+    '\n\n[Tambah objektif, perasmi, peserta dan impak program di sini.]'+(t.pautanSiaran?'\n\nTonton rakaman: '+t.pautanSiaran:'');
+  $('bInfo').innerHTML='<div class="info">Maklumat diisi secara automatik daripada tempahan siaran langsung. Lengkapkan keterangan dan muat naik gambar program.</div>';
+  window.scrollTo(0,0);
+}
+function bukaMaklumBalas(id){
+  const t=cariT(id); if(!t) return;
+  const label=['','Sangat Lemah','Lemah','Sederhana','Baik','Cemerlang'];
+  bukaModal('<h3>Maklum Balas Perkhidmatan UKOM</h3><div class="kecil-t">'+esc(t.program)+'</div>'+
+    '<label>Penilaian keseluruhan *</label><div class="pilihan">'+[5,4,3,2,1].map(n=>'<label class="pil"><input type="radio" name="mbNilai" value="'+n+'"> '+n+' · '+label[n]+'</label>').join('')+'</div>'+
+    '<label for="mbUlasan">Ulasan / cadangan</label><textarea class="in" id="mbUlasan" maxlength="1000" style="min-height:90px"></textarea>'+
+    '<div class="baris"><button class="b" id="bMB" onclick="hantarMB(\''+t.id+'\')">Hantar</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',480);
+}
+async function hantarMB(id){
+  const n=document.querySelector('input[name="mbNilai"]:checked'); if(!n) return roti('Sila pilih penilaian.',true);
+  const b=$('bMB'); sibuk(b,true,'Menghantar…');
+  try{ await panggil('hantarMaklumBalas',S.token,id,+n.value,$('mbUlasan').value.trim()); tutupModal(); roti('Terima kasih atas maklum balas anda.'); muatTSaya(); }
+  catch(e){ roti(e.message,true); sibuk(b,false,'Hantar'); }
+}
+
+/* ================= PENGURUSAN: TEMPAHAN JABATAN ================= */
+function tajukSkop(jenis,ttl,info){
+  const semua=atasan()||admin();
+  $(ttl).textContent=semua?'Semua '+jenis+' (Seluruh IPGKDRI)':jenis+' Jabatan: '+(S.user.jabatan||'—');
+  $(info).textContent=semua?'Paparan sahaja. Anda boleh menyunting '+jenis.toLowerCase()+' anda sendiri melalui tab "'+(jenis==='Berita'?'Berita Saya':'Tempahan Live')+'".'
+    :jenis+' oleh anda dan seluruh ahli jabatan (paparan sahaja).';
+}
+function isiTapisJab(id,data){
+  const el=$(id); if(!(atasan()||admin())){ el.classList.add('sembunyi'); return; }
+  const pilih=el.value, jab=jabatanList(); data.forEach(x=>{ if(x.jabatan&&jab.indexOf(x.jabatan)<0) jab.push(x.jabatan); });
+  el.innerHTML=pilihan(jab,pilih,'Semua Jabatan/Unit'); el.classList.remove('sembunyi');
+}
+async function muatTJab(){
+  tajukSkop('Tempahan','ttlTJab','infoTJab');
+  $('senaraiTJab').innerHTML='<div class="kosong">Memuatkan…</div>';
+  try{ S.tJab=await panggil('tempahanJabatan',S.token); isiTapisJab('tJabJab',S.tJab); lukisTJab(); }
+  catch(e){ $('senaraiTJab').innerHTML='<div class="kosong">'+esc(e.message)+'</div>'; }
+}
+function lukisTJab(){
+  const kini=hariIniStr(), q=$('tJabCari').value.toLowerCase(), jf=$('tJabJab').classList.contains('sembunyi')?'':$('tJabJab').value;
+  const data=S.tJab.filter(t=>!jf||t.jabatan===jf);
+  const kira=f=>data.filter(f).length;
+  $('tJabRingkas').innerHTML=[['Jumlah tempahan',data.length],['Dalam semakan',kira(t=>t.status==='Baharu'||t.status==='Perlu Pindaan')],
+    ['Akan datang (diluluskan)',kira(t=>t.status==='Diluluskan'&&t.tarikh>=kini)],['Siaran selesai',kira(t=>t.status==='Selesai')]]
+    .map(x=>'<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  const asas=data.filter(t=>!q||[t.program,t.nama,t.lokasi].join(' ').toLowerCase().indexOf(q)>-1);
+  $('tJabTapis').innerHTML=['Semua'].concat(STATUS_T).map(s=>{
+    const n=s==='Semua'?asas.length:asas.filter(t=>t.status===s).length;
+    return '<button class="'+(S.tJabTapis===s?'aktif':'')+'" onclick="S.tJabTapis=\''+s+'\';lukisTJab()">'+esc(s==='Baharu'?'Dalam Semakan':s)+' ('+n+')</button>';
+  }).join('');
+  const r=asas.filter(t=>S.tJabTapis==='Semua'||t.status===S.tJabTapis);
+  $('senaraiTJab').innerHTML=r.length?r.map(t=>kadT(t,'')).join(''):'<div class="kosong">Tiada tempahan.</div>';
+}
+
+/* ================= KETUA JABATAN: BERITA JABATAN ================= */
+async function muatBJab(){
+  tajukSkop('Berita','ttlBJab','infoBJab');
+  $('senaraiBJab').innerHTML='<div class="kosong">Memuatkan…</div>';
+  try{ S.bJab=await panggil('beritaJabatan',S.token); isiTapisJab('bJabJab',S.bJab); lukisBJab(); }
+  catch(e){ $('senaraiBJab').innerHTML='<div class="kosong">'+esc(e.message)+'</div>'; }
+}
+function lukisBJab(){
+  const q=$('bJabCari').value.toLowerCase(), jf=$('bJabJab').classList.contains('sembunyi')?'':$('bJabJab').value;
+  const data=S.bJab.filter(b=>!jf||b.jabatan===jf), kira=s=>data.filter(b=>b.status===s).length;
+  $('bJabRingkas').innerHTML=[['Jumlah berita',data.length],['Diterbitkan',kira('Diterbitkan')],['Menunggu semakan',kira('Baharu')],['Ditolak',kira('Ditolak')]]
+    .map(x=>'<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  const asas=data.filter(b=>!q||[b.tajuk,b.nama,b.tempat].join(' ').toLowerCase().indexOf(q)>-1);
+  $('bJabTapis').innerHTML=['Semua','Baharu','Diterbitkan','Ditolak'].map(s=>{
+    const n=s==='Semua'?asas.length:asas.filter(b=>b.status===s).length;
+    return '<button class="'+(S.bJabTapis===s?'aktif':'')+'" onclick="S.bJabTapis=\''+s+'\';lukisBJab()">'+s+' ('+n+')</button>';
+  }).join('');
+  const r=asas.filter(b=>S.bJabTapis==='Semua'||b.status===S.bJabTapis);
+  $('senaraiBJab').innerHTML=r.length?r.map(b=>kad(b,b.pautanFB?'<a class="b kecil" href="'+esc(urlSelamat(b.pautanFB))+'" target="_blank" rel="noopener">Lihat di Facebook</a>':'')).join('')
+    :'<div class="kosong">Tiada berita.</div>';
+}
+
+/* ================= SUPER ADMIN: JABATAN / UNIT ================= */
+async function segarCfg(){ try{ const c=await panggil('tetapan'); S.cfg.jabatan=c.jabatan; }catch(e){} }
+async function muatJabatan(){
+  $('jadualJabatan').innerHTML='Memuatkan…';
+  try{ S.jabUrus=await panggil('senaraiJabatanUrus',S.token); lukisJabatan(); }
+  catch(e){ $('jadualJabatan').innerHTML=esc(e.message); }
+}
+function lukisJabatan(){
+  const j=S.jabUrus;
+  $('jadualJabatan').innerHTML=j.length?'<table><tr><th>Jabatan / Unit</th><th class="n">Pengguna</th><th class="n">Berita</th><th class="n">Tempahan</th><th></th></tr>'+j.map((x,i)=>
+    '<tr><td><b>'+esc(x.nama)+'</b></td><td class="n">'+x.pengguna+'</td><td class="n">'+x.berita+'</td><td class="n">'+x.tempahan+'</td>'+
+    '<td style="white-space:nowrap;text-align:right"><button class="b putih kecil" onclick="suntingJabatan('+i+')">✎ Sunting</button> '+
+    '<button class="b merah kecil" onclick="padamJabatanUI('+i+')">Padam</button></td></tr>').join('')+'</table>'
+    :'<div class="kecil-t">Belum ada Jabatan/Unit.</div>';
+}
+async function tambahJabatan(){
+  const n=$('jNama').value.trim(); if(!n) return roti('Sila isi nama Jabatan/Unit.',true);
+  const b=$('bJabTambah'); sibuk(b,true,'Menyimpan…');
+  try{ await panggil('simpanJabatan',S.token,n,''); $('jNama').value=''; roti('Jabatan/Unit ditambah.'); await segarCfg(); muatJabatan(); }
+  catch(e){ roti(e.message,true); }
+  sibuk(b,false,'+ Tambah');
+}
+function suntingJabatan(i){
+  const x=S.jabUrus[i]; if(!x) return;
+  bukaModal('<h3>Sunting Jabatan / Unit</h3>'+
+    '<label for="eJNama">Nama *</label><input class="in" id="eJNama" maxlength="120" value="'+esc(x.nama)+'">'+
+    '<div class="info" style="margin-top:10px">Perubahan nama turut dikemas kini pada '+x.pengguna+' pengguna, '+x.berita+' berita dan '+x.tempahan+' tempahan.</div>'+
+    '<div class="baris"><button class="b" id="bJabSimpan" onclick="simpanJabatanEdit('+i+')">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',480);
+}
+async function simpanJabatanEdit(i){
+  const x=S.jabUrus[i], n=$('eJNama').value.trim(); if(!n) return roti('Nama wajib diisi.',true);
+  const b=$('bJabSimpan'); sibuk(b,true,'Menyimpan…');
+  try{
+    const r=await panggil('simpanJabatan',S.token,n,x.nama);
+    tutupModal(); roti('Nama dikemas kini'+(r.dikemaskini?' ('+r.dikemaskini+' rekod berkaitan)':'')+'.');
+    if(S.user.jabatan===x.nama) S.user.jabatan=n;
+    await segarCfg(); muatJabatan();
+  }catch(e){ roti(e.message,true); sibuk(b,false,'Simpan'); }
+}
+async function padamJabatanUI(i){
+  const x=S.jabUrus[i]; if(!x) return;
+  if(x.pengguna) return roti('Tidak boleh dipadam: masih ada '+x.pengguna+' pengguna dalam '+x.nama+'. Pindahkan mereka dahulu di tab Pengguna.',true);
+  if(!confirm('Padam "'+x.nama+'"?\nRekod berita dan tempahan lama kekal dengan nama ini.')) return;
+  try{ await panggil('padamJabatan',S.token,x.nama); roti('Jabatan/Unit dipadam.'); await segarCfg(); muatJabatan(); }
+  catch(e){ roti(e.message,true); }
+}
+
+/* ================= ADMIN: URUS TEMPAHAN ================= */
+async function muatUrus(){
+  $('urusJadual').innerHTML='<div class="kecil-t" style="padding:12px">Memuatkan…</div>';
+  try{
+    S.tSemua=await panggil('semuaTempahan',S.token);
+    const pilih=$('urusJab').value;
+    const jab=jabatanList(); S.tSemua.forEach(t=>{ if(t.jabatan && jab.indexOf(t.jabatan)<0) jab.push(t.jabatan); });
+    $('urusJab').innerHTML=pilihan(jab,pilih,'Semua Jabatan/Unit');
+    lukisUrus();
+  }catch(e){ $('urusJadual').innerHTML='<div class="kecil-t" style="padding:12px">'+esc(e.message)+'</div>'; }
+}
+function lukisUrus(){
+  const kini=hariIniStr(), seminggu=tkhStr(new Date(Date.now()+6*86400000));
+  const kira=f=>S.tSemua.filter(f).length;
+  $('urusRingkas').innerHTML=[['Menunggu semakan',kira(t=>t.status==='Baharu'),'var(--kuning)'],['Perlu pindaan',kira(t=>t.status==='Perlu Pindaan'),'var(--merah)'],
+    ['Diluluskan (akan datang)',kira(t=>t.status==='Diluluskan'&&t.tarikh>=kini),'var(--hijau)'],['Siaran 7 hari ini',kira(t=>t.status==='Diluluskan'&&t.tarikh>=kini&&t.tarikh<=seminggu),'']]
+    .map(x=>'<div><b'+(x[2]?' style="color:'+x[2]+'"':'')+'>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  const q=$('urusCari').value.toLowerCase(), j=$('urusJab').value;
+  const asas=S.tSemua.filter(t=>(!j||t.jabatan===j)&&(!q||[t.program,t.nama,t.emel,t.lokasi].join(' ').toLowerCase().indexOf(q)>-1));
+  $('urusTapis').innerHTML=STATUS_T.concat(['Semua']).map(s=>{
+    const n=s==='Semua'?asas.length:asas.filter(t=>t.status===s).length;
+    return '<button class="'+(S.tTapis===s?'aktif':'')+'" onclick="S.tTapis=\''+s+'\';lukisUrus()">'+esc(s)+' ('+n+')</button>';
+  }).join('');
+  let r=asas.filter(t=>S.tTapis==='Semua'||t.status===S.tTapis);
+  if(['Baharu','Perlu Pindaan','Diluluskan'].indexOf(S.tTapis)>-1) r=r.slice().sort((a,b)=>(a.tarikh+a.masaMula).localeCompare(b.tarikh+b.masaMula));
+  $('urusJadual').innerHTML=r.length?'<table><thead><tr><th>Program</th><th>Tarikh &amp; Masa</th><th>Lokasi</th><th>Jenis</th><th>Krew</th><th>Status</th></tr></thead><tbody>'+
+    r.map(t=>'<tr class="klik" tabindex="0" onclick="bukaUrus(\''+t.id+'\')" onkeydown="if(event.key===\'Enter\')bukaUrus(\''+t.id+'\')">'+
+      '<td><b>'+esc(t.program)+'</b>'+(t.fbHebahId?' <span class="kecil-t">📘</span>':'')+'<div class="kecil-t">'+esc(t.jabatan)+' · '+esc(t.nama)+'</div></td>'+
+      '<td style="white-space:nowrap">'+esc(tarikh(t.tarikh))+'<div class="kecil-t">'+esc(julatMasa(t))+'</div></td>'+
+      '<td>'+esc(t.lokasi)+'</td><td>'+esc(t.jenis)+'</td>'+
+      '<td>'+(t.krew?esc(t.krew.split(',').length+' orang'):'<span class="kecil-t">—</span>')+'</td>'+
+      '<td>'+lencana(t.status)+'</td></tr>').join('')+'</tbody></table>'
+    :'<div class="kecil-t" style="padding:16px;text-align:center">Tiada tempahan.</div>';
+}
+async function bukaUrus(id){
+  if(!S.tSemua.length){ try{ S.tSemua=await panggil('semuaTempahan',S.token); }catch(e){ return roti(e.message,true); } }
+  const t=S.tSemua.find(x=>x.id===id); if(!t) return;
+  const dipilih=String(t.krew||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const krew=S.sumber.krew.filter(k=>k.aktif||dipilih.indexOf(k.nama)>-1);
+  bukaModal('<h3>'+esc(t.program)+'</h3>'+lencana(t.status)+(t.fbHebahId?' <span class="kecil-t">📘 telah dihebah</span>':'')+
+    jadualT(t)+
+    '<h4 class="sub">Semakan Pertembungan</h4><div id="uSlot" class="kecil-t">Menyemak…</div>'+
+    '<h4 class="sub">Agihan Krew</h4><div class="semak">'+(krew.length?krew.map(k=>
+      '<label class="cek krewR"><input type="checkbox" class="uKrewC" value="'+esc(k.nama)+'"'+(dipilih.indexOf(k.nama)>-1?' checked':'')+'> '+
+      '<span><b>'+esc(k.nama)+'</b> · '+esc(k.peranan||'Krew')+'</span><span class="krewSt" data-nama="'+esc(k.nama)+'"></span></label>').join('')
+      :'<div class="kecil-t">Belum ada krew. Tambah di tab 🧰 Krew &amp; Peralatan.</div>')+'</div>'+
+    '<div class="dua"><div><label for="uPautan">Pautan siaran / rakaman</label><input class="in" id="uPautan" value="'+esc(t.pautanSiaran)+'" placeholder="https://…"></div>'+
+    '<div><label for="uTempoh">Tempoh rakaman <span class="kecil-t">(selepas selesai)</span></label><input class="in" id="uTempoh" value="'+esc(t.tempohRakaman)+'" placeholder="cth. 2 jam 30 minit"></div></div>'+
+    '<label for="uCatatan">Catatan kepada pemohon <span class="kecil-t">(wajib jika Perlu Pindaan / Ditolak)</span></label><input class="in" id="uCatatan" value="'+esc(['Perlu Pindaan','Ditolak'].indexOf(t.status)>-1?t.catatanAdmin:'')+'">'+
+    '<div class="baris">'+
+      '<button class="b hijau" onclick="tindakanT(\''+t.id+'\',\'Diluluskan\')">✔ '+(t.status==='Diluluskan'?'Simpan Perubahan':'Luluskan &amp; Maklumkan')+'</button>'+
+      '<button class="b putih" onclick="tindakanT(\''+t.id+'\',\'Perlu Pindaan\')">Perlu Pindaan</button>'+
+      '<button class="b merah" onclick="tindakanT(\''+t.id+'\',\'Ditolak\')">✖ Tolak</button>'+
+      '<button class="b putih" onclick="tindakanT(\''+t.id+'\',\'Selesai\')">Tandakan Selesai</button>'+
+    '</div>'+hebahHtml(t)+
+    '<div class="baris" style="border-top:1px solid var(--garis);padding-top:12px">'+
+      '<button class="b putih kecil" onclick="suntingTempahan(\''+t.id+'\')">✎ Sunting Tempahan</button>'+
+      (t.status!=='Baharu'?'<button class="b putih kecil" onclick="tindakanT(\''+t.id+'\',\'Baharu\')">↺ Set Baharu</button>':'')+
+      (['Selesai','Dibatalkan','Ditolak'].indexOf(t.status)<0?'<button class="b merah kecil" onclick="batalT(\''+t.id+'\')">Batalkan</button>':'')+
+      '<button class="b merah kecil" onclick="padamT(\''+t.id+'\')">Padam</button>'+
+      '<button class="b putih kecil" style="margin-left:auto" onclick="tutupModal()">Tutup</button></div>',760);
+  try{
+    const r=await panggil('semakSlot',S.token,t,t.id);
+    if(!$('uSlot')) return;
+    $('uSlot').innerHTML=lukisSlot(r,false);
+    document.querySelectorAll('.krewSt').forEach(el=>{
+      const sibuk=r.krewSibuk.indexOf(el.dataset.nama)>-1;
+      el.textContent=sibuk?'Bertugas di program lain':'Tersedia';
+      el.style.color=sibuk?'var(--merah)':'var(--hijau)';
+    });
+  }catch(e){ if($('uSlot')) $('uSlot').textContent=e.message; }
+}
+async function tindakanT(id,status,paksa){
+  const d={status:status,catatanAdmin:$('uCatatan').value.trim(),pautanSiaran:$('uPautan').value.trim(),tempohRakaman:$('uTempoh').value.trim(),
+    krew:[...document.querySelectorAll('.uKrewC:checked')].map(c=>c.value),paksa:!!paksa};
+  if((status==='Perlu Pindaan'||status==='Ditolak')&&!d.catatanAdmin) return roti('Sila isi catatan kepada pemohon.',true);
+  if(d.pautanSiaran&&!/^https?:\/\//i.test(d.pautanSiaran)) return roti('Pautan mesti bermula dengan https://',true);
+  try{ await panggil('kemaskiniTempahan',S.token,id,d); roti('Tempahan dikemas kini: '+status); tutupModal(); S.kalData={}; muatUrus(); }
+  catch(e){
+    if(e.message.indexOf('PERTEMBUNGAN')===0){
+      if(confirm(e.message.replace(/^PERTEMBUNGAN:\s*/,'')+'\n\nTeruskan juga meluluskan tempahan ini?')) return tindakanT(id,status,true);
+      return;
+    }
+    roti(e.message,true);
+  }
+}
+function kapsyenHebah(t){
+  return '🔴 SIARAN LANGSUNG\n\n'+t.program+'\n\n🗓️ '+tarikhPanjang(t.tarikh)+'\n⏰ '+julatMasa(t)+'\n📍 '+t.lokasi+'\n🏢 '+t.jabatan+'\n\n▶️ '+
+    (t.pautanSiaran?'Saksikan di: '+t.pautanSiaran:'Saksikan secara langsung di '+(t.platform||'Page IPGKDRI'))+'\n\n'+S.cfg.hashtag;
+}
+function hebahHtml(t){
+  if(t.status!=='Diluluskan') return '';
+  if(t.fbHebahId) return '<div class="fbok">✅ Hebahan telah diterbitkan ke Facebook · <a href="https://www.facebook.com/'+esc(t.fbHebahId)+'" target="_blank" rel="noopener">Buka ↗</a></div>';
+  if(!S.cfg.fbAuto) return '<div class="kecil-t" style="margin-top:10px">💡 Untuk hebah ke Facebook, tetapkan sambungan di tab ⚙️ Tetapan FB.</div>';
+  return '<label for="uKap">Kapsyen hebahan Facebook <span class="kecil-t">(boleh disunting)</span></label><textarea class="kapsyen" id="uKap">'+esc(kapsyenHebah(t))+'</textarea>'+
+    '<div class="baris"><button class="b fb" id="bHebah" onclick="hebahFB(\''+t.id+'\')">📘 Hebah ke Facebook</button><span class="kecil-t">Simpan pautan siaran dahulu supaya pautan disertakan.</span></div>';
+}
+async function hebahFB(id){
+  const t=S.tSemua.find(x=>x.id===id); if(!t) return;
+  const teks=$('uKap').value.trim(); if(!teks) return roti('Kapsyen tidak boleh kosong.',true);
+  if(!confirm('Terbitkan hebahan "'+t.program+'" ke Page Facebook sekarang?')) return;
+  const b=$('bHebah'); sibuk(b,true,'Menerbitkan…');
+  try{ const r=await panggil('hebahFacebook',S.token,id,teks); tutupModal(); roti('Hebahan diterbitkan ke Facebook! 🎉'); await muatUrus(); if(r.pautanHebah) window.open(r.pautanHebah,'_blank'); }
+  catch(e){ roti(e.message,true); sibuk(b,false,'📘 Hebah ke Facebook'); }
+}
+async function padamT(id){
+  if(!confirm('Padam tempahan ini secara kekal? Lampiran juga akan dipadam.\n(Untuk rekod, lebih baik guna "Batalkan".)')) return;
+  try{ await panggil('padamTempahan',S.token,id); roti('Tempahan dipadam.'); tutupModal(); S.kalData={}; muatUrus(); }
+  catch(e){ roti(e.message,true); }
+}
+
+/* ================= KALENDAR ================= */
+async function muatKalendar(){
+  if(!S.kalBulan){ const n=new Date(); S.kalBulan=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0'); S.kalPilih=hariIniStr(); }
+  const ym=S.kalBulan;
+  lukisKalendar(S.kalData[ym]||[]);
+  try{ S.kalData[ym]=await panggil('kalendar',S.token,ym); if(ym===S.kalBulan) lukisKalendar(S.kalData[ym]); }
+  catch(e){ roti(e.message,true); }
+}
+function ubahBulan(n){
+  const p=S.kalBulan.split('-').map(Number); const d=new Date(p[0],p[1]-1+n,1);
+  S.kalBulan=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); S.kalPilih=null; muatKalendar();
+}
+/** Tarikh terawal yang boleh ditempah (sekurang-kurangnya N hari bekerja dari hari ini). Admin: hari ini. */
+function tarikhAwal(){
+  const d=new Date(); d.setHours(0,0,0,0);
+  if(admin()) return tkhStr(d);
+  let n=0;
+  while(n<S.cfg.minHari){ d.setDate(d.getDate()+1); if(S.cfg.hujungMinggu.indexOf(d.getDay())<0) n++; }
+  return tkhStr(d);
+}
+function hhmm(min){ return String(Math.floor(min/60)).padStart(2,'0')+':'+String(min%60).padStart(2,'0'); }
+function lukisKalendar(data){
+  const p=S.kalBulan.split('-').map(Number), y=p[0], m=p[1];
+  $('kalTajuk').textContent=BULAN[m-1]+' '+y;
+  $('legTutup').classList.toggle('sembunyi',admin());
+  const awal=new Date(y,m-1,1), anjak=(awal.getDay()+6)%7, akhir=new Date(y,m,0).getDate();
+  const bil=Math.ceil((anjak+akhir)/7)*7, kini=hariIniStr(), mulaTempah=tarikhAwal();
+  let h='';
+  for(let i=0;i<bil;i++){
+    const d=new Date(y,m-1,1-anjak+i), s=tkhStr(d), luar=d.getMonth()!==m-1;
+    const ev=data.filter(t=>t.tarikh===s).sort((a,b)=>a.masaMula.localeCompare(b.masaMula));
+    const hujung=S.cfg.hujungMinggu.indexOf(d.getDay())>-1;
+    const cls=['sel'];
+    if(luar) cls.push('luar'); if(hujung) cls.push('hujung');
+    if(!hujung && s<mulaTempah && s>=kini) cls.push('tutup');
+    if(s===kini) cls.push('kini'); if(s===S.kalPilih) cls.push('pilih');
+    h+='<button class="'+cls.join(' ')+'" onclick="pilihHari(\''+s+'\')" aria-label="'+esc(tarikhPanjang(s))+', '+ev.length+' siaran"><span class="no">'+d.getDate()+'</span>'+
+      (s===mulaTempah&&!admin()?'<span class="awal">Mula boleh tempah</span>':'')+
+      (ev.length?'<span class="bil">'+ev.length+'</span>':'')+
+      ev.slice(0,3).map(t=>'<span class="ev ev-'+esc(t.status.split(' ')[0])+(t.milik?' milik':'')+'" title="'+esc(julatMasa(t)+' · '+t.program+' ('+labelSt(t.status)+')')+'">'+esc(t.masaMula+' '+t.program)+'</span>').join('')+
+      (ev.length>3?'<span class="lagi">+'+(ev.length-3)+' lagi</span>':'')+'</button>';
+  }
+  $('kalGrid').innerHTML=h;
+  lukisSisi(data);
+}
+function pilihHari(s){ S.kalPilih=s; lukisKalendar(S.kalData[S.kalBulan]||[]); if(window.innerWidth<900) $('kalSisi').scrollIntoView({behavior:'smooth'}); }
+/** Waktu lapang (tiada tempahan diluluskan / dalam semakan) antara 8:00 pagi dan 6:00 petang, minimum 1 jam. */
+function waktuLapang(ev){
+  const MULA=8*60, TAMAT=18*60;
+  const sibuk=ev.map(t=>[minit(t.masaMula),minit(t.masaTamat)]).filter(x=>x[1]>MULA&&x[0]<TAMAT).sort((a,b)=>a[0]-b[0]);
+  const hasil=[]; let k=MULA;
+  sibuk.forEach(x=>{ if(x[0]-k>=60) hasil.push([k,x[0]]); k=Math.max(k,x[1]); });
+  if(TAMAT-k>=60) hasil.push([k,TAMAT]);
+  return hasil;
+}
+function lukisSisi(data){
+  const el=$('kalSisi');
+  if(!S.kalPilih){ el.innerHTML='<div class="kecil-t">Klik pada tarikh untuk melihat butiran siaran.</div>'; return; }
+  const tkh=S.kalPilih;
+  const ev=data.filter(t=>t.tarikh===tkh).sort((a,b)=>a.masaMula.localeCompare(b.masaMula));
+  const lulus=ev.filter(t=>t.status==='Diluluskan').length;
+  const semak=ev.filter(t=>t.status==='Baharu'||t.status==='Perlu Pindaan').length;
+  const d=new Date(+tkh.slice(0,4),+tkh.slice(5,7)-1,+tkh.slice(8,10));
+  const hujung=S.cfg.hujungMinggu.indexOf(d.getDay())>-1;
+  const lepas=tkh<hariIniStr(), awal=tarikhAwal(), terlalu=!lepas&&tkh<awal;
+  const bolehTempah=!lepas&&!terlalu;
+  // Garis masa 7:00 pagi – 11:00 malam
+  const A=7*60, Z=23*60, pct=v=>((Math.min(Math.max(v,A),Z)-A)/(Z-A)*100).toFixed(2);
+  const bar='<div class="masaBar" aria-hidden="true">'+ev.map(t=>{
+      const a=minit(t.masaMula), b=minit(t.masaTamat), kls=(t.status==='Diluluskan'||t.status==='Selesai')?'lulus':'semak';
+      return '<i class="'+kls+'" style="left:'+pct(a)+'%;width:'+Math.max(0.8,pct(b)-pct(a))+'%" title="'+esc(julatMasa(t)+' · '+t.program)+'"></i>';
+    }).join('')+'</div><div class="masaSkala"><span>7 pg</span><span>10 pg</span><span>1 ptg</span><span>4 ptg</span><span>7 mlm</span><span>11 mlm</span></div>';
+  let cadangan='';
+  if(bolehTempah){
+    const lapang=waktuLapang(ev.filter(t=>t.status!=='Selesai'));
+    cadangan='<h4 class="sub" style="margin-top:14px">Waktu lapang (8 pg – 6 ptg)</h4>'+
+      (lapang.length?'<div class="kecil-t">Klik untuk terus mengisi borang tempahan:</div><div class="lapang">'+lapang.map(x=>{
+          const tamat=Math.min(x[1],x[0]+120);
+          return '<button onclick="baruTempahan(\''+tkh+'\',\''+hhmm(x[0])+'\',\''+hhmm(tamat)+'\')">'+esc(masa12(hhmm(x[0]))+' – '+masa12(hhmm(x[1])))+'</button>';
+        }).join('')+'</div>'
+        :'<div class="kecil-t">Tiada waktu lapang sekurang-kurangnya 1 jam. Pertimbangkan tarikh lain.</div>');
+  }
+  let nota='';
+  if(lepas) nota='<div class="info" style="margin-top:12px">Tarikh ini telah berlalu.</div>';
+  else if(terlalu) nota='<div class="nota" style="margin-top:12px">Tarikh ini belum boleh ditempah. Tempahan perlu dibuat sekurang-kurangnya <b>'+S.cfg.minHari+' hari bekerja</b> lebih awal. Tarikh terawal: <b>'+esc(tarikhPanjang(awal))+'</b>.</div>';
+  else if(hujung) nota='<div class="info" style="margin-top:12px">Tarikh ini jatuh pada hujung minggu. Pastikan krew UKOM tersedia sebelum menempah.</div>';
+  el.innerHTML='<h2 style="font-size:16px;margin:0 0 2px">'+esc(tarikhPanjang(tkh))+'</h2>'+
+    '<div class="kecil-t">'+(ev.length?lulus+' diluluskan · '+semak+' dalam semakan':'Tiada siaran dijadualkan — tarikh ini masih lapang')+'</div>'+
+    bar+cadangan+
+    ev.map(t=>'<div class="evSisi'+(t.milik?' milik':'')+'"><div style="font-size:12.5px;font-weight:700;color:var(--utama)">'+esc(julatMasa(t))+'</div>'+
+      '<div style="font-weight:700;font-size:14px">'+esc(t.program)+(t.milik?' <span class="kecil-t">(tempahan anda)</span>':'')+'</div>'+
+      '<div class="kecil-t">'+esc(t.lokasi)+' · '+esc(t.jabatan)+'</div>'+
+      '<div class="kecil-t">'+esc(t.platform||t.jenis)+(t.bilKrew?' · '+t.bilKrew+' krew':'')+'</div>'+
+      '<div>'+lencanaT(t.status)+(admin()?' <button class="b putih kecil" style="margin-left:6px" onclick="bukaUrus(\''+t.id+'\')">Urus</button>':'')+'</div></div>').join('')+
+    nota+
+    (bolehTempah?'<button class="b penuh" style="margin-top:12px" onclick="baruTempahan(\''+tkh+'\')">+ Tempah Slot pada Tarikh Ini</button>':'')+
+    '<div class="info" style="margin-top:12px">Kapasiti UKOM: maksimum <b>'+S.cfg.maksSerentak+'</b> siaran serentak'+(lulus?' · '+lulus+' siaran diluluskan pada hari ini':'')+'. Pertembungan lokasi & peralatan disemak secara automatik semasa mengisi borang.</div>';
+}
+
+/* ================= ADMIN: KREW & PERALATAN ================= */
+async function muatSumberAdmin(){
+  $('jadualKrew').innerHTML='Memuatkan…'; $('jadualPeralatan').innerHTML='Memuatkan…';
+  try{ S.sumber=await panggil('senaraiSumber',S.token); lukisSumber(); }
+  catch(e){ $('jadualKrew').innerHTML=esc(e.message); $('jadualPeralatan').innerHTML=''; }
+}
+function lukisSumber(){
+  const k=S.sumber.krew, p=S.sumber.peralatan;
+  $('jadualKrew').innerHTML=k.length?'<table><tr><th>Nama</th><th>Peranan</th><th>Telefon</th><th>Status</th><th></th></tr>'+k.map((x,i)=>
+    '<tr><td><b>'+esc(x.nama)+'</b></td><td>'+esc(x.peranan||'—')+'</td><td>'+esc(x.telefon||'—')+'</td><td>'+lencana(x.aktif?'Aktif':'Tidak Aktif')+'</td>'+
+    '<td style="white-space:nowrap;text-align:right"><button class="b putih kecil" onclick="suntingKrew('+i+')">✎ Sunting</button> <button class="b merah kecil" onclick="padamKrewUI('+i+')">Padam</button></td></tr>').join('')+'</table>'
+    :'<div class="kecil-t">Belum ada krew didaftarkan.</div>';
+  $('jadualPeralatan').innerHTML=p.length?'<table><tr><th>Kod</th><th>Nama</th><th class="n">Kuantiti</th><th>Status</th><th></th></tr>'+p.map((x,i)=>
+    '<tr><td><code>'+esc(x.kod)+'</code></td><td>'+esc(x.nama)+'</td><td class="n">'+x.kuantiti+'</td><td>'+lencana(x.aktif?'Aktif':'Tidak Aktif')+'</td>'+
+    '<td style="white-space:nowrap;text-align:right"><button class="b putih kecil" onclick="suntingAlat('+i+')">✎ Sunting</button> <button class="b merah kecil" onclick="padamAlatUI('+i+')">Padam</button></td></tr>').join('')+'</table>'
+    :'<div class="kecil-t">Belum ada peralatan.</div>';
+}
+async function tambahKrew(){
+  const d={nama:$('kNama').value.trim(),peranan:$('kPeranan').value.trim(),telefon:$('kTel').value.trim(),aktif:true};
+  if(!d.nama) return roti('Nama krew wajib diisi.',true);
+  const b=$('bKrew'); sibuk(b,true,'Menyimpan…');
+  try{ await panggil('simpanKrew',S.token,d,''); ['kNama','kPeranan','kTel'].forEach(id=>$(id).value=''); roti('Krew ditambah.'); muatSumberAdmin(); }
+  catch(e){ roti(e.message,true); }
+  sibuk(b,false,'Tambah Krew');
+}
+function suntingKrew(i){
+  const x=S.sumber.krew[i]; if(!x) return;
+  bukaModal('<h3>Sunting Krew</h3>'+
+    '<label for="eKNama">Nama *</label><input class="in" id="eKNama" value="'+esc(x.nama)+'">'+
+    '<div class="dua"><div><label for="eKPer">Peranan</label><input class="in" id="eKPer" list="dlPerananKrew" value="'+esc(x.peranan)+'"></div>'+
+    '<div><label for="eKTel">No. Telefon</label><input class="in" id="eKTel" value="'+esc(x.telefon)+'"></div></div>'+
+    '<label for="eKSt">Status</label><select class="in" id="eKSt"><option'+(x.aktif?' selected':'')+'>Aktif</option><option'+(!x.aktif?' selected':'')+'>Tidak Aktif</option></select>'+
+    '<div class="baris"><button class="b" onclick="simpanKrewEdit('+i+')">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',460);
+}
+async function simpanKrewEdit(i){
+  const x=S.sumber.krew[i];
+  const d={nama:$('eKNama').value.trim(),peranan:$('eKPer').value.trim(),telefon:$('eKTel').value.trim(),aktif:$('eKSt').value==='Aktif'};
+  try{ await panggil('simpanKrew',S.token,d,x.nama); tutupModal(); roti('Maklumat krew dikemas kini.'); muatSumberAdmin(); }
+  catch(e){ roti(e.message,true); }
+}
+async function padamKrewUI(i){
+  const x=S.sumber.krew[i]; if(!x||!confirm('Padam krew '+x.nama+'? (Rekod tugasan lama dalam tempahan kekal.)')) return;
+  try{ await panggil('padamKrew',S.token,x.nama); roti('Krew dipadam.'); muatSumberAdmin(); }catch(e){ roti(e.message,true); }
+}
+async function tambahPeralatan(){
+  const d={kod:$('pKod').value.trim().toUpperCase(),nama:$('pNama').value.trim(),kuantiti:$('pKuantiti').value,aktif:true};
+  if(!d.kod||!d.nama) return roti('Kod dan nama peralatan wajib diisi.',true);
+  const b=$('bAlat'); sibuk(b,true,'Menyimpan…');
+  try{ await panggil('simpanPeralatan',S.token,d,''); $('pKod').value=''; $('pNama').value=''; $('pKuantiti').value='1'; roti('Peralatan ditambah.'); muatSumberAdmin(); }
+  catch(e){ roti(e.message,true); }
+  sibuk(b,false,'Tambah Peralatan');
+}
+function suntingAlat(i){
+  const x=S.sumber.peralatan[i]; if(!x) return;
+  bukaModal('<h3>Sunting Peralatan</h3><div class="kecil-t">Kod: <code>'+esc(x.kod)+'</code> (tidak boleh ditukar)</div>'+
+    '<label for="ePNamaA">Nama *</label><input class="in" id="ePNamaA" value="'+esc(x.nama)+'">'+
+    '<div class="dua"><div><label for="ePKua">Kuantiti *</label><input class="in" id="ePKua" type="number" min="0" value="'+x.kuantiti+'"></div>'+
+    '<div><label for="ePStA">Status</label><select class="in" id="ePStA"><option'+(x.aktif?' selected':'')+'>Aktif</option><option'+(!x.aktif?' selected':'')+'>Tidak Aktif</option></select></div></div>'+
+    '<div class="baris"><button class="b" onclick="simpanAlatEdit('+i+')">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',460);
+}
+async function simpanAlatEdit(i){
+  const x=S.sumber.peralatan[i];
+  const d={kod:x.kod,nama:$('ePNamaA').value.trim(),kuantiti:$('ePKua').value,aktif:$('ePStA').value==='Aktif'};
+  try{ await panggil('simpanPeralatan',S.token,d,x.kod); tutupModal(); roti('Peralatan dikemas kini.'); muatSumberAdmin(); }
+  catch(e){ roti(e.message,true); }
+}
+async function padamAlatUI(i){
+  const x=S.sumber.peralatan[i]; if(!x||!confirm('Padam peralatan '+x.nama+'? Lebih baik tukar status kepada Tidak Aktif jika masih ada dalam rekod tempahan.')) return;
+  try{ await panggil('padamPeralatan',S.token,x.kod); roti('Peralatan dipadam.'); muatSumberAdmin(); }catch(e){ roti(e.message,true); }
+}
+
+/* ================= ADMIN: TETAPAN FACEBOOK ================= */
+async function muatFB(){
+  $('fbRintis').innerHTML=S.cfg.rintis?'<div class="nota" style="margin-bottom:10px"><b>Versi RINTIS:</b> gunakan Page Facebook ujian, atau biarkan kosong, supaya tiada hantaran tersilap ke Page rasmi IPGKDRI.</div>':'';
+  $('fbStatus').innerHTML='Menyemak sambungan…';
+  try{
+    const r=await panggil('statusFacebook',S.token);
+    $('fbPageId').value=r.pageId||''; $('fbToken').value='';
+    S.cfg.fbAuto=!!(r.pageId&&r.adaToken);
+    $('fbStatus').innerHTML = !S.cfg.fbAuto
+      ? '<div class="info">⚪ Belum disambungkan. Ikut langkah di bawah untuk mendapatkan Page ID dan token.</div>'
+      : r.ralat
+        ? '<div class="nota"><b>⚠️ Sambungan gagal:</b> '+esc(r.ralat)+'<br>Token mungkin telah tamat. Jana token baharu dan simpan semula.</div>'
+        : '<div class="fbok" style="margin-top:0">✅ Disambungkan ke Page: <b>'+esc(r.namaPage)+'</b> · token '+esc(r.tokenRingkas)+'</div>';
+  }catch(e){ $('fbStatus').innerHTML='<div class="nota">'+esc(e.message)+'</div>'; }
+}
+async function simpanFB(){
+  const b=$('bFbSimpan'); sibuk(b,true,'Menguji…');
+  try{
+    const r=await panggil('simpanTetapanFacebook',S.token,$('fbPageId').value,$('fbToken').value);
+    roti('Berjaya disambungkan ke Page: '+r.namaPage); S.cfg.fbAuto=true; muatFB();
+  }catch(e){ roti(e.message,true); }
+  sibuk(b,false,'Simpan & Uji Sambungan');
+}
+async function padamFB(){
+  if(!confirm('Putuskan sambungan Facebook? Butang terbit terus akan disembunyikan.')) return;
+  try{ await panggil('padamTetapanFacebook',S.token); S.cfg.fbAuto=false; roti('Sambungan diputuskan.'); muatFB(); }
+  catch(e){ roti(e.message,true); }
+}
+
+/* ================= ADMIN: ANALISIS ================= */
+function tukarAnMod(m){ S.anMod=m; lukisAnalisis(); }
+async function muatAnalisis(){
+  $('anJadual').innerHTML='Memuatkan…';
+  try{
+    const r=await Promise.all([panggil('semuaBerita',S.token),panggil('semuaTempahan',S.token)]);
+    S.berita=r[0]; S.tSemua=r[1];
+    const tahun=[...new Set(S.berita.map(b=>(b.tarikhProgram||'').slice(0,4)).concat(S.tSemua.map(t=>(t.tarikh||'').slice(0,4))).filter(Boolean))].sort().reverse();
+    const ini=String(new Date().getFullYear()); if(tahun.indexOf(ini)<0) tahun.unshift(ini);
+    const pT=$('anTahun').value||ini, pB=$('anBulan').value;
+    $('anTahun').innerHTML='<option value="Semua">Semua tahun</option>'+tahun.map(t=>'<option'+(t===pT?' selected':'')+'>'+t+'</option>').join('');
+    $('anBulan').innerHTML='<option value="">Semua bulan</option>'+BLN.map((m,i)=>'<option value="'+String(i+1).padStart(2,'0')+'"'+(pB===String(i+1).padStart(2,'0')?' selected':'')+'>'+m+'</option>').join('');
+    lukisAnalisis();
+  }catch(e){ $('anJadual').innerHTML=esc(e.message); }
+}
+function tapisMasa(senarai,medan){
+  const t=$('anTahun').value, m=$('anBulan').value;
+  return senarai.filter(x=>{ const tp=x[medan]||''; return (t==='Semua'||tp.slice(0,4)===t) && (!m||tp.slice(5,7)===m); });
+}
+function lukisAnalisis(){
+  $('anM-berita').classList.toggle('aktif',S.anMod==='berita'); $('anM-live').classList.toggle('aktif',S.anMod==='live');
+  $('anM-berita').setAttribute('aria-selected',S.anMod==='berita'); $('anM-live').setAttribute('aria-selected',S.anMod==='live');
+  if(S.anMod==='live') return lukisAnalisisLive();
+  $('anLive').innerHTML='';
+  const data=tapisMasa(S.berita,'tarikhProgram'), baris=kiraJabatan(data);
+  const kira=s=>data.filter(b=>b.status===s).length;
+  $('anRingkas').innerHTML=[['Jumlah berita',data.length],['Diterbitkan',kira('Diterbitkan')],['Menunggu semakan',kira('Baharu')],['Ditolak',kira('Ditolak')]]
+    .map(x=>'<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  const maks=Math.max(1,...baris.map(r=>r.jumlah));
+  $('anJadual').innerHTML='<table><tr><th>Jabatan / Unit</th><th class="n">Jumlah</th><th class="n">Diterbitkan</th><th class="n">Baharu</th><th class="n">Ditolak</th><th style="width:30%"></th></tr>'+
+    baris.map(r=>'<tr><td>'+esc(r.jabatan)+'</td><td class="n"><b>'+r.jumlah+'</b></td><td class="n">'+r.Diterbitkan+'</td><td class="n">'+r.Baharu+'</td><td class="n">'+r.Ditolak+'</td>'+
+      '<td><div class="bar" title="'+r.jumlah+' berita"><i style="width:'+(r.jumlah/maks*100)+'%"></i></div></td></tr>').join('')+'</table>';
+  lukisBulan(S.berita,'tarikhProgram',()=>true,'Berita Ikut Bulan');
+}
+function kiraJabatan(data){
+  const peta={}; jabatanList().forEach(j=>peta[j]={jabatan:j,jumlah:0,Diterbitkan:0,Baharu:0,Ditolak:0});
+  data.forEach(b=>{ const j=b.jabatan||'(Tiada maklumat)'; if(!peta[j]) peta[j]={jabatan:j,jumlah:0,Diterbitkan:0,Baharu:0,Ditolak:0}; peta[j].jumlah++; if(peta[j][b.status]!==undefined) peta[j][b.status]++; });
+  return Object.values(peta).sort((a,b)=>b.jumlah-a.jumlah||b.Diterbitkan-a.Diterbitkan||a.jabatan.localeCompare(b.jabatan));
+}
+function lukisBulan(senarai,medan,syarat,tajuk){
+  const t=$('anTahun').value;
+  const bln=BLN.map((m,i)=>senarai.filter(x=>syarat(x)&&(t==='Semua'||(x[medan]||'').slice(0,4)===t)&&(x[medan]||'').slice(5,7)===String(i+1).padStart(2,'0')).length);
+  const mb=Math.max(1,...bln);
+  $('anTajukBulan').textContent=tajuk+(t==='Semua'?' (semua tahun)':' — '+t);
+  $('anBulanCarta').innerHTML=bln.map((n,i)=>'<div><b>'+(n||'')+'</b><i style="height:'+(n/mb*100)+'%"></i>'+BLN[i]+'</div>').join('');
+}
+function jamSiaran(t){ return Math.max(0,(minit(t.masaTamat)-minit(t.masaMula))/60); }
+function kiraJabatanLive(data){
+  const peta={};
+  data.forEach(t=>{
+    const j=t.jabatan||'(Tiada maklumat)';
+    if(!peta[j]) peta[j]={jabatan:j,jumlah:0,selesai:0,akanDatang:0,tidak:0,jam:0};
+    const p=peta[j]; p.jumlah++;
+    if(t.status==='Selesai'){ p.selesai++; p.jam+=jamSiaran(t); }
+    else if(t.status==='Diluluskan') p.akanDatang++;
+    else if(t.status==='Ditolak'||t.status==='Dibatalkan') p.tidak++;
+  });
+  return Object.values(peta).sort((a,b)=>b.jumlah-a.jumlah||a.jabatan.localeCompare(b.jabatan));
+}
+function lukisAnalisisLive(){
+  const data=tapisMasa(S.tSemua,'tarikh'), selesai=data.filter(t=>t.status==='Selesai');
+  const jam=selesai.reduce((s,t)=>s+jamSiaran(t),0);
+  const dinilai=selesai.filter(t=>t.penilaian);
+  const purata=dinilai.length?(dinilai.reduce((s,t)=>s+(+t.penilaian),0)/dinilai.length).toFixed(1)+' / 5':'—';
+  $('anRingkas').innerHTML=[['Jumlah tempahan',data.length],['Siaran selesai',selesai.length],['Jam siaran (selesai)',jam.toFixed(1)],['Purata maklum balas ('+dinilai.length+')',purata]]
+    .map(x=>'<div><b>'+x[1]+'</b><span>'+esc(x[0])+'</span></div>').join('');
+  const baris=kiraJabatanLive(data), maks=Math.max(1,...baris.map(r=>r.jumlah));
+  $('anJadual').innerHTML=baris.length?'<table><tr><th>Jabatan / Unit</th><th class="n">Tempahan</th><th class="n">Selesai</th><th class="n">Akan Datang</th><th class="n">Ditolak/Batal</th><th class="n">Jam</th><th style="width:24%"></th></tr>'+
+    baris.map(r=>'<tr><td>'+esc(r.jabatan)+'</td><td class="n"><b>'+r.jumlah+'</b></td><td class="n">'+r.selesai+'</td><td class="n">'+r.akanDatang+'</td><td class="n">'+r.tidak+'</td><td class="n">'+r.jam.toFixed(1)+'</td>'+
+      '<td><div class="bar"><i style="width:'+(r.jumlah/maks*100)+'%"></i></div></td></tr>').join('')+'</table>'
+    :'<div class="kecil-t">Tiada tempahan bagi tempoh ini.</div>';
+  lukisBulan(S.tSemua,'tarikh',t=>t.status==='Selesai'||t.status==='Diluluskan','Siaran (Diluluskan & Selesai) Ikut Bulan');
+  const aktif=data.filter(t=>t.status==='Selesai'||t.status==='Diluluskan');
+  const plat={}, krew={};
+  aktif.forEach(t=>{
+    String(t.platform||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(p=>plat[p]=(plat[p]||0)+1);
+    String(t.krew||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(k=>krew[k]=(krew[k]||0)+1);
+  });
+  const senaraiBar=(o,unit)=>{ const k=Object.keys(o).sort((a,b)=>o[b]-o[a]); const mx=Math.max(1,...k.map(x=>o[x]));
+    return k.length?k.map(x=>'<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13.5px"><span>'+esc(x)+'</span><b>'+o[x]+' '+unit+'</b></div><div class="bar" style="margin-top:4px"><i style="width:'+(o[x]/mx*100)+'%"></i></div></div>').join('')
+      :'<div class="kecil-t">Tiada data.</div>'; };
+  $('anLive').innerHTML='<div class="kad"><h2 style="font-size:16px">Ikut Platform</h2>'+senaraiBar(plat,'siaran')+'</div>'+
+    '<div class="kad"><h2 style="font-size:16px">Beban Tugas Krew</h2>'+senaraiBar(krew,'tugasan')+'</div>';
+}
+function eksportCSV(){
+  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+  let csv, nama;
+  if(S.anMod==='live'){
+    const baris=kiraJabatanLive(tapisMasa(S.tSemua,'tarikh'));
+    csv=['Jabatan/Unit,Tempahan,Selesai,Akan Datang,Ditolak/Batal,Jam Siaran'].concat(baris.map(r=>[q(r.jabatan),r.jumlah,r.selesai,r.akanDatang,r.tidak,r.jam.toFixed(1)].join(','))).join('\n');
+    nama='Analisis_SiaranLive_';
+  }else{
+    const baris=kiraJabatan(tapisMasa(S.berita,'tarikhProgram'));
+    csv=['Jabatan/Unit,Jumlah,Diterbitkan,Baharu,Ditolak'].concat(baris.map(r=>[q(r.jabatan),r.jumlah,r.Diterbitkan,r.Baharu,r.Ditolak].join(','))).join('\n');
+    nama='Analisis_Berita_';
+  }
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'}));
+  a.download=nama+$('anTahun').value+($('anBulan').value?'-'+$('anBulan').value:'')+'.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ================= SUPER ADMIN: PENGGUNA ================= */
+/**
+ * Susun Senarai Pengguna:
+ *  1) Super Admin → Admin → Pengurusan Atasan (kemudian Jabatan/Unit A–Z, nama A–Z)
+ *  2) Ketua Jabatan, Pensyarah, Staf & Sinergi dikumpul ikut Jabatan/Unit (A–Z);
+ *     dalam setiap jabatan: Ketua Jabatan → Pensyarah → Staf → Sinergi, kemudian nama (A–Z)
+ */
+function susunPengguna(senarai){
+  const tahap=Object.keys(LABEL_PERANAN);   // superadmin, admin, atasan, ketua, pensyarah, staf, sinergi
+  const t=p=>{ const i=tahap.indexOf(p); return i<0?99:i; };
+  const kump=p=>Math.min(t(p),3);           // 0 superadmin, 1 admin, 2 atasan, 3 jabatan (ketua/pensyarah/staf/sinergi)
+  const ab=(a,b)=>String(a||'').localeCompare(String(b||''),'ms',{sensitivity:'base'});
+  return senarai.slice().sort((a,b)=>kump(a.peranan)-kump(b.peranan)||ab(a.jabatan,b.jabatan)||t(a.peranan)-t(b.peranan)||ab(a.nama,b.nama));
+}
+async function muatPengguna(){
+  $('uJabatan').innerHTML=pilihan(jabatanList(), $('uJabatan').value, '— Pilih —');
+  $('uPeranan').innerHTML=pilihanPeranan($('uPeranan').value||'pensyarah');
+  $('jadualPengguna').innerHTML='Memuatkan…';
+  try{
+    S.pengguna=susunPengguna(await panggil('senaraiPengguna',S.token));
+    $('jadualPengguna').innerHTML='<table><tr><th>Nama / Emel</th><th>Jabatan / Unit</th><th>Peranan</th><th>Status</th><th></th></tr>'+S.pengguna.map((x,i)=>{
+      const saya=x.emel===S.user.emel;
+      return '<tr><td><b>'+esc(x.nama)+'</b>'+(saya?' (anda)':'')+'<div class="kecil-t">'+esc(x.emel)+'</div></td>'+
+        '<td>'+esc(x.jabatan||'—')+'</td><td>'+esc(LABEL_PERANAN[x.peranan]||x.peranan)+'</td><td>'+lencana(x.status)+'</td>'+
+        '<td style="white-space:nowrap;text-align:right"><button class="b putih kecil" onclick="bukaPengguna('+i+')">✎ Sunting</button> '+
+        '<button class="b putih kecil" onclick="'+(saya?'bukaTukarKL()':'bukaKLPengguna('+i+')')+'">🔑 Kata Laluan</button> '+
+        (saya?'':'<button class="b merah kecil" onclick="padamPengguna('+i+')">Padam</button>')+'</td></tr>';
+    }).join('')+'</table>';
+  }catch(e){ $('jadualPengguna').innerHTML=esc(e.message); }
+}
+async function tambahPengguna(){
+  const d={emel:$('uEmel').value.trim(),nama:$('uNama').value.trim(),jabatan:$('uJabatan').value,peranan:$('uPeranan').value};
+  if(!d.emel||!d.nama||!d.jabatan) return roti('Sila isi emel, nama dan Jabatan/Unit.',true);
+  const b=$('bTambah'); sibuk(b,true,'Mendaftar…');
+  try{
+    const kl=await panggil('tambahPengguna',S.token,d);
+    $('klBaru').innerHTML='<div class="klbox">Akaun <b>'+esc(d.emel)+'</b> ('+esc(LABEL_PERANAN[d.peranan])+') didaftarkan.<br>Kata laluan sementara:<br><code>'+esc(kl)+'</code><div class="kecil-t">Maklumkan kepada pengguna. Pengguna boleh menukarnya sendiri melalui butang "🔑 Kata Laluan".</div></div>';
+    $('uEmel').value=''; $('uNama').value=''; muatPengguna();
+  }catch(e){ roti(e.message,true); }
+  sibuk(b,false,'Daftar');
+}
+function bukaPengguna(i){
+  const x=S.pengguna[i]; if(!x) return;
+  const saya=x.emel===S.user.emel;
+  bukaModal('<h3>Sunting Pengguna</h3><div class="kecil-t">'+esc(x.emel)+'</div>'+
+    '<label for="ePNama">Nama Penuh *</label><input class="in" id="ePNama" value="'+esc(x.nama)+'">'+
+    '<label for="ePJab">Jabatan / Unit</label><select class="in" id="ePJab">'+pilihan(jabatanList(x.jabatan),x.jabatan,'— Pilih —')+'</select>'+
+    '<div class="dua"><div><label for="ePPer">Peranan</label><select class="in" id="ePPer"'+(saya?' disabled':'')+'>'+pilihanPeranan(x.peranan)+'</select></div>'+
+    '<div><label for="ePSt">Status</label><select class="in" id="ePSt"'+(saya?' disabled':'')+'><option'+(x.status==='Aktif'?' selected':'')+'>Aktif</option><option'+(x.status!=='Aktif'?' selected':'')+'>Tidak Aktif</option></select></div></div>'+
+    (saya?'<div class="kecil-t" style="margin-top:6px">Peranan dan status akaun sendiri tidak boleh diubah.</div>':'')+
+    '<div class="baris"><button class="b" onclick="simpanPengguna('+i+')">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',460);
+}
+async function simpanPengguna(i){
+  const x=S.pengguna[i];
+  const d={nama:$('ePNama').value.trim(),jabatan:$('ePJab').value,peranan:$('ePPer').value,status:$('ePSt').value};
+  try{
+    const u=await panggil('suntingPengguna',S.token,x.emel,d);
+    if(x.emel===S.user.emel){ S.user=Object.assign(S.user,u); $('lblNama').textContent=u.nama; }
+    roti('Maklumat pengguna dikemas kini.'); tutupModal(); muatPengguna();
+  }catch(e){ roti(e.message,true); }
+}
+function medanKL(id,label){ return '<label for="'+id+'">'+label+'</label><div class="pw"><input class="in" type="password" id="'+id+'" autocomplete="new-password"><button type="button" title="Tunjuk / sembunyi" aria-label="Tunjuk atau sembunyi kata laluan" onclick="lihatKL(\''+id+'\',this)">👁</button></div>'; }
+function lihatKL(id,btn){ const i=$(id); i.type=i.type==='password'?'text':'password'; btn.textContent=i.type==='password'?'👁':'🙈'; }
+function klRawak(){ const a='ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789'; let s=''; for(let i=0;i<9;i++) s+=a[Math.floor(Math.random()*a.length)]; return s+Math.floor(Math.random()*10); }
+function bukaKLPengguna(i){
+  const x=S.pengguna[i]; if(!x) return;
+  bukaModal('<h3>Tetapkan Kata Laluan</h3><div class="kecil-t">'+esc(x.nama)+' · '+esc(x.emel)+'</div>'+
+    medanKL('aKL','Kata laluan baharu (min. 8 aksara)')+medanKL('aKL2','Sahkan kata laluan baharu')+
+    '<div class="baris"><button class="b putih kecil" onclick="jana2()">🎲 Jana Kata Laluan Rawak</button></div>'+
+    '<div class="kecil-t" style="margin-top:8px">Pengguna ini akan dilog keluar dari semua peranti dan perlu log masuk dengan kata laluan baharu.</div>'+
+    '<div class="baris"><button class="b" id="bAKL" onclick="simpanKLPengguna('+i+')">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',440);
+  $('aKL').focus();
+}
+function jana2(){ const k=klRawak(); $('aKL').value=k; $('aKL2').value=k; $('aKL').type='text'; $('aKL2').type='text'; }
+async function simpanKLPengguna(i){
+  const x=S.pengguna[i], a=$('aKL').value;
+  if(a.length<8) return roti('Kata laluan mesti sekurang-kurangnya 8 aksara.',true);
+  if(a!==$('aKL2').value) return roti('Pengesahan kata laluan tidak sepadan.',true);
+  const b=$('bAKL'); sibuk(b,true,'Menyimpan…');
+  try{
+    const kl=await panggil('tetapkanKataLaluan',S.token,x.emel,a);
+    tutupModal();
+    $('klBaru').innerHTML='<div class="klbox">Kata laluan baharu untuk <b>'+esc(x.emel)+'</b>:<br><code>'+esc(kl)+'</code><div class="kecil-t">Maklumkan kepada pengguna secara peribadi.</div></div>';
+    window.scrollTo({top:0,behavior:'smooth'}); roti('Kata laluan pengguna dikemas kini.');
+  }catch(e){ roti(e.message,true); sibuk(b,false,'Simpan'); }
+}
+async function padamPengguna(i){
+  const x=S.pengguna[i];
+  if(!x||!confirm('Padam akaun '+x.emel+'? Berita dan tempahan yang telah dihantar akan kekal.')) return;
+  try{ await panggil('padamPengguna',S.token,x.emel); roti('Akaun dipadam.'); muatPengguna(); }
+  catch(e){ roti(e.message,true); }
+}
+
+/* ================= TUKAR KATA LALUAN ================= */
+function bukaTukarKL(){
+  bukaModal('<h3>Tukar Kata Laluan Saya</h3><div class="kecil-t">'+esc(S.user.nama)+' · '+esc(S.user.emel)+'</div>'+
+    medanKL('kLama','Kata laluan semasa')+medanKL('kBaru','Kata laluan baharu (min. 8 aksara)')+medanKL('kBaru2','Sahkan kata laluan baharu')+
+    '<div class="kecil-t" style="margin-top:8px">Peranti lain yang sedang log masuk dengan akaun ini akan dilog keluar.</div>'+
+    '<div class="baris"><button class="b" id="bKL" onclick="tukarKL()">Simpan</button><button class="b putih" onclick="tutupModal()">Batal</button></div>',420);
+}
+async function tukarKL(){
+  const a=$('kBaru').value;
+  if(a.length<8) return roti('Kata laluan baharu mesti sekurang-kurangnya 8 aksara.',true);
+  if(a!==$('kBaru2').value) return roti('Pengesahan kata laluan tidak sepadan.',true);
+  if(!$('kLama').value) return roti('Masukkan kata laluan semasa.',true);
+  const b=$('bKL'); sibuk(b,true,'Menyimpan…');
+  try{ await panggil('tukarKataLaluan',S.token,$('kLama').value,a); tutupModal(); roti('Kata laluan anda telah ditukar.'); }
+  catch(e){ roti(e.message,true); sibuk(b,false,'Simpan'); }
+}
+
+/* ================= MULA ================= */
+// Jika Code.gs belum dikemas kini (tiada fungsi mula), guna cara lama: tetapan + semakSesi
+async function mulaSelamat(t){
+  try{ return await panggil('mula',t||''); }
+  catch(e){
+    if(!/is not a function|not defined|tidak ditemui/i.test(e.message)) throw e;
+    const cfg=await panggil('tetapan');
+    let user=null; if(t){ try{ user=await panggil('semakSesi',t); }catch(x){} }
+    return {cfg:cfg,user:user};
+  }
+}
+$('lKL').addEventListener('keydown',e=>{ if(e.key==='Enter') logMasuk(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') tutupModal(); });
+(async function(){
+  const t=ambil('en_token')||ambil0('en_token_rintis');
+  const mesejGagal = DALAM_GAS
+    ? 'Sistem tidak dapat dihubungi. Cuba: (1) buka dalam tetingkap Inkognito, (2) log keluar akaun Google lain dalam pelayar ini, '+
+      '(3) jika guna Safari/Brave, benarkan kuki pihak ketiga atau guna Google Chrome.'
+    : 'Sistem tidak dapat dihubungi. Semak sambungan Internet, kemudian muat semula halaman ini.';
+  let r;
+  try{
+    // Tetapan, semakan sesi & parameter URL diambil serentak (lebih pantas)
+    r=await Promise.all([
+      Promise.race([mulaSelamat(t), new Promise((_,g)=>setTimeout(()=>g(new Error(mesejGagal)),30000))]),
+      paramURL()
+    ]);
+  }
+  catch(e){ S.cfg={maksGambar:5,hashtag:'#IPGKDRI',jabatan:[],jenis:[],platform:[],hujungMinggu:[5,6],minHari:7,maksSerentak:2,maksLampiranMB:5}; skrinLog(e.message); return; }
+  S.cfg=r[0].cfg;
+  if(S.cfg.rintis){ $('lblRintis').classList.remove('sembunyi'); document.title=S.cfg.nama+' (RINTIS)'; }
+  $('kTahun').textContent=new Date().getFullYear();
+  $('kVersi').textContent=S.cfg.nama+' v'+S.cfg.versi+(S.cfg.rintis?' (Rintis)':'');
+  if(S.cfg.pembangun){ $('kPembangun').textContent=S.cfg.pembangun; $('kPembangun').href='mailto:'+S.cfg.pembangun; }
+  if(r[1].reset) return skrinReset(r[1].reset);
+  if(r[0].user){ S.token=t; return masuk(r[0].user); }
+  if(t) simpan('en_token',null);
+  skrinLog();
+})();
+</script>
+</body>
+</html>
